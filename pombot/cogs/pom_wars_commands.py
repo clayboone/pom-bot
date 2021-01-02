@@ -72,7 +72,12 @@ class Attack:
         """The markdown-formatted version of the message.txt from the
         action's directory, and its result, as a string.
         """
-        action = "You attack the {team} for {dmg:.2f} damage!".format(
+        action_msgs = [f"{Pomwars.Emotes.ATTACK} `{{dmg:.2f}} damage to {{team}}!"]
+
+        if self.is_critical:
+            action_msgs += [f"{Pomwars.Emotes.CRITICAL} `Critical attack!`"]
+
+        action = "\n".join(action_msgs).format(
             team=f"{(~_get_user_team(user)).value}s",
             dmg=adjusted_damage or self.damage,
         )
@@ -101,7 +106,8 @@ class Defend:
         """The markdown-formatted version of the message.txt from the
         action's directory, and its result, as a string.
         """
-        action = "You help defend the {team}!".format(
+        action = "{emt} `2%% damage reduction to {team}`".format(  #FIXME get level
+            emt=Pomwars.Emotes.DEFEND,
             team=f"{(_get_user_team(user)).value}s",
         )
         story = "*" + re.sub(r"(?<!\n)\n(?!\n)|\n{3,}", " ", self._message) + "*"
@@ -259,7 +265,7 @@ class PomWarsUserCommands(commands.Cog):
             title=f"Actions for {date_range}",
             description=description,
             icon_url=Pomwars.IconUrls.SWORD,
-            colour=Pomwars.ACTION_COLOUR,
+            colour=Pomwars.Colours.GENERIC,
             private_message=True,
         )
         await ctx.message.add_reaction(Reactions.CHECKMARK)
@@ -329,7 +335,8 @@ class PomWarsUserCommands(commands.Cog):
             title="Attack successful!",
             description=attack.get_message(ctx.author, action["damage"]),
             icon_url=Pomwars.IconUrls.SWORD,
-            colour=Pomwars.ACTION_COLOUR,
+            colour=(Pomwars.Colours.ATTACK_HEAVY
+                    if heavy_attack else Pomwars.Colours.ATTACK_NORMAL),
             _func=partial(ctx.channel.send, content=ctx.author.mention),
         )
 
@@ -376,7 +383,7 @@ class PomWarsUserCommands(commands.Cog):
             title="Defend successful!",
             description=defend.get_message(ctx.author),
             icon_url=Pomwars.IconUrls.SHIELD,
-            colour=Pomwars.ACTION_COLOUR,
+            colour=Pomwars.Colours.DEFEND,
             _func=partial(ctx.channel.send, content=ctx.author.mention),
         )
 
@@ -416,7 +423,7 @@ class PomwarsEventListeners(Cog):
                         description=Locations.SCOREBOARD_BODY.read_text("utf8").format(
                             join_button=Reactions.WAR_JOIN_REACTION),
                         icon_url=icon_url,
-                        colour=Pomwars.ACTION_COLOUR,
+                        colour=Pomwars.Colours.GENERIC,
                         _func=channel.send,
                     )
                     await msg.add_reaction(Reactions.WAR_JOIN_REACTION)

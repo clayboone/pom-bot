@@ -81,7 +81,6 @@ class Pomwars:
     BASE_CHANCE_FOR_CRITICAL = 0.20
     SUCCESSFUL_ATTACK_EMOTE = os.getenv("SUCCESSFUL_ATTACK_EMOTE")
     SUCCESSFUL_DEFEND_EMOTE = os.getenv("SUCCESSFUL_DEFEND_EMOTE")
-    ACTION_COLOUR = 0x00ff00
 
     JOIN_CHANNEL_NAME = os.getenv("JOIN_CHANNEL_NAME").lstrip("#")
     KNIGHT_ONLY_GUILDS = [
@@ -92,6 +91,19 @@ class Pomwars:
         int(guild.strip()) if guild.strip() else 0
         for guild in os.getenv("VIKING_ONLY_GUILDS").split(",")
     ]
+
+    class Colours:
+        """Configurable colours for embeds."""
+        GENERIC = 0x00ff00
+        ATTACK_NORMAL = 0xffd700  #FIXME: was this in otehr PR?
+        ATTACK_HEAVY = 0xffd700
+        DEFEND = 0x00ff00  #FIXME: was this in otehr PR?
+
+    class Emotes:
+        """Discord-specifc, custom emotes as `<:id:1234>` strings."""
+        ATTACK = "<:attack:794694043015446530>"
+        CRITICAL = "<:critical:794710983536672788>"
+        DEFEND = "<:defend:794694015861260308>"
 
     # pylint: disable=line-too-long
     class IconUrls:

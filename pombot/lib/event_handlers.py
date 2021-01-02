@@ -92,7 +92,7 @@ async def on_raw_reaction_add_handler(bot: Bot, payload: RawReactionActionEvent)
             None,
             title=f"Welcome to the {team}s, {payload.member.display_name}!",
             description=dm_description,
-            colour=Pomwars.ACTION_COLOUR,
+            colour=Pomwars.Colours.GENERIC,
             icon_url=team.get_icon(),
             _func=payload.member.send,
         )
@@ -110,7 +110,7 @@ async def on_raw_reaction_add_handler(bot: Bot, payload: RawReactionActionEvent)
                 _func=payload.member.send
             )
             return
-        
+
         Storage.set_user_timezone(
                 payload.user_id,
                 timezone(timedelta(hours=TIMEZONES[payload.emoji.name]))
