@@ -72,7 +72,7 @@ class Attack:
         """The markdown-formatted version of the message.txt from the
         action's directory, and its result, as a string.
         """
-        action_msgs = [f"{Pomwars.Emotes.ATTACK} `{{dmg:.2f}} damage to {{team}}!"]
+        action_msgs = [f"{Pomwars.Emotes.ATTACK} `{{dmg:.2f}} damage` to {{team}}!"]
 
         if self.is_critical:
             action_msgs += [f"{Pomwars.Emotes.CRITICAL} `Critical attack!`"]
@@ -106,7 +106,7 @@ class Defend:
         """The markdown-formatted version of the message.txt from the
         action's directory, and its result, as a string.
         """
-        action = "{emt} `{dfn}%% damage reduction to {team}`".format(
+        action = "{emt} `{dfn}%% damage reduction` to {team}".format(
             emt=Pomwars.Emotes.DEFEND,
             team=f"{(_get_user_team(user)).value}s",
             dfn=100 * Pomwars.DEFEND_LEVEL_MULTIPLIERS[Storage.get_user_by_id(user.id)],
