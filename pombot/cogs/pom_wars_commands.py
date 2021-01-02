@@ -106,9 +106,10 @@ class Defend:
         """The markdown-formatted version of the message.txt from the
         action's directory, and its result, as a string.
         """
-        action = "{emt} `2%% damage reduction to {team}`".format(  #FIXME get level
+        action = "{emt} `{dfn}%% damage reduction to {team}`".format(
             emt=Pomwars.Emotes.DEFEND,
             team=f"{(_get_user_team(user)).value}s",
+            dfn=100 * Pomwars.DEFEND_LEVEL_MULTIPLIERS[Storage.get_user_by_id(user.id)],
         )
         story = "*" + re.sub(r"(?<!\n)\n(?!\n)|\n{3,}", " ", self._message) + "*"
 
@@ -198,8 +199,6 @@ def _get_defensive_multiplier(team: Team, timestamp: datetime) -> float:
 
 class PomWarsUserCommands(commands.Cog):
     """Commands used by users during a Pom War."""
-    HEAVY_QUALIFIERS = ["heavy", "hard", "sharp", "strong"]
-
     def __init__(self, bot: Bot):
         self.bot = bot
 
@@ -271,9 +270,10 @@ class PomWarsUserCommands(commands.Cog):
         await ctx.message.add_reaction(Reactions.CHECKMARK)
 
     @commands.command()
+    @commands.has_any_role(Pomwars.KNIGHT_ROLE, Pomwars.VIKING_ROLE)
     async def attack(self, ctx: Context, *args):
         """Attack the other team."""
-        heavy_attack = bool(args) and args[0].casefold() in self.HEAVY_QUALIFIERS
+        heavy_attack = bool(args) and args[0].casefold() == Pomwars.HEAVY_ATTACK_QUALIFIER
         description = " ".join(args[1:] if heavy_attack else args)
         timestamp = datetime.now()
 
@@ -341,6 +341,7 @@ class PomWarsUserCommands(commands.Cog):
         )
 
     @commands.command()
+    @commands.has_any_role(Pomwars.KNIGHT_ROLE, Pomwars.VIKING_ROLE)
     async def defend(self, ctx: Context, *args):
         """Defend your team."""
         timestamp = datetime.now()

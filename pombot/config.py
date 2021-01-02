@@ -73,6 +73,7 @@ class Debug:
 
 class Pomwars:
     """Configuration for Pom Wars."""
+    HEAVY_ATTACK_QUALIFIER = "heavy"
     LOAD_ON_STARTUP = _str2bool(os.getenv("LOAD_ON_STARTUP", "no"))
     KNIGHT_ROLE = os.getenv("KNIGHT_ROLE")
     VIKING_ROLE = os.getenv("VIKING_ROLE")
@@ -95,9 +96,9 @@ class Pomwars:
     class Colours:
         """Configurable colours for embeds."""
         GENERIC = 0x00ff00
-        ATTACK_NORMAL = 0xffd700  #FIXME: was this in otehr PR?
+        ATTACK_NORMAL = 0xff6347  # Same as a pom.
         ATTACK_HEAVY = 0xffd700
-        DEFEND = 0x00ff00  #FIXME: was this in otehr PR?
+        DEFEND = 0x55aedd
 
     class Emotes:
         """Discord-specifc, custom emotes as `<:id:1234>` strings."""
