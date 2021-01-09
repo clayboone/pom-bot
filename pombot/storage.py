@@ -353,21 +353,13 @@ class Storage:
                 raise pombot.errors.UserAlreadyExistsError(user) from exc
 
     @staticmethod
-    def set_user_timezone(user_id: str, zone: timezone):
-        """Set the user timezone."""
-        query = f"""
-            UPDATE {Config.USERS_TABLE}
-            SET timezone=%s
-            WHERE userID=%s
-        """
-
-        zone_str = time(tzinfo=zone).strftime('%z')
-
-        with _mysql_database_cursor() as cursor:
-            cursor.execute(query, (zone_str, user_id))
-
-    @staticmethod
-    def update_user(user_id: str, *, team: Team = None, guild_id: int = None):
+    def update_user(
+        user_id: str,
+        *,
+        team: Team = None,
+        guild_id: int = None,
+        zone: timezone = None,
+    ):
         """Set the user team."""
         updates = []
         values = []
@@ -379,6 +371,10 @@ class Storage:
         if guild_id:
             updates += ["guildID=%s"]
             values += [guild_id]
+
+        if zone:
+            updates += ["timezone=%s"]
+            values += [zone]
 
         if not updates:
             return

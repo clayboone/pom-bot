@@ -128,9 +128,9 @@ async def on_raw_reaction_add_handler(bot: Bot, payload: RawReactionActionEvent)
             )
             return
 
-        Storage.set_user_timezone(
+        Storage.update_user(
                 payload.user_id,
-                timezone(timedelta(hours=TIMEZONES[payload.emoji.name]))
+                zone=timezone(timedelta(hours=TIMEZONES[payload.emoji.name]))
             )
 
 def _get_guild_team_or_random(guild_id: int) -> Team:
