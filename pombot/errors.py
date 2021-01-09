@@ -25,9 +25,9 @@ class InvalidNumberOfRolesError(PomWarsError):
 
 class UserAlreadyExistsError(PomWarsError):
     """User already exists in database."""
-    def __init__(self, team, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.team = team
+        self.user = user
 
 
 class UserDoesNotExistError(PomWarsError):

@@ -71,7 +71,12 @@ async def on_raw_reaction_add_handler(bot: Bot, payload: RawReactionActionEvent)
         dm_description = "Enjoy the Pom War event! Good luck and have fun!"
 
         try:
-            Storage.add_user(payload.user_id, timezone(timedelta(hours=0)), team)
+            Storage.add_user(
+                user_id=payload.user_id,
+                zone=timezone(timedelta(hours=0)),
+                team=team,
+                guild_id=payload.guild_id,
+            )
         except pombot.errors.UserAlreadyExistsError as exc:
             dm_description = "You're already on a team! :open_mouth:"
             user_roles = [r.name for r in payload.member.roles]
@@ -84,13 +89,13 @@ async def on_raw_reaction_add_handler(bot: Bot, payload: RawReactionActionEvent)
                     continue
 
             if len(bot_roles_on_user) in [0, 2]:
-                team = Team(exc.team)
+                team = Team(exc.user.team)
             else:
                 team = Team(bot_roles_on_user[0])
 
-                if team != exc.team:
+                if team != exc.user.team:
                     dm_description = "It looks like your team has been swapped!"
-                    Storage.update_user_team(payload.user_id, team)
+                    Storage.update_user(payload.user_id, team=team, guild_id=payload.guild_id)
 
         try:
             await send_embed_message(

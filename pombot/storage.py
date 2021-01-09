@@ -58,7 +58,8 @@ class Storage:
                     current_session TINYINT(1),
                     PRIMARY KEY(id)
                 );
-            """
+            """,
+            "alterations": []
         },
         {
             "name": Config.EVENTS_TABLE,
@@ -71,7 +72,8 @@ class Storage:
                     end_date TIMESTAMP NOT NULL,
                     PRIMARY KEY(id)
                 );
-            """
+            """,
+            "alterations": []
         },
         {
             "name": Config.USERS_TABLE,
@@ -87,7 +89,21 @@ class Storage:
                     defend_level TINYINT(1) NOT NULL DEFAULT 1,
                     PRIMARY KEY(userID)
                 );
-            """
+            """,
+            "alterations": [
+                {
+                    "condition": f"""
+                        SELECT COUNT(*) FROM information_schema.columns
+                        WHERE table_schema = '{Secrets.MYSQL_DATABASE}'
+                        AND table_name = '{Config.USERS_TABLE}'
+                        AND column_name = 'guildID';
+                    """,
+                    "alter_query": f"""
+                        ALTER TABLE {Config.USERS_TABLE}
+                        ADD guildID BIGINT(20) NOT NULL DEFAULT 0;
+                    """
+                }
+            ]
         },
         {
             "name": Config.ACTIONS_TABLE,
@@ -104,7 +120,8 @@ class Storage:
                     time_set TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY(id)
                 );
-            """
+            """,
+            "alterations": []
         },
     ]
 
@@ -112,11 +129,19 @@ class Storage:
     def create_tables_if_not_exists(cls):
         """Create predefined DB tables if they don't already exist."""
         for table in cls.TABLES:
-            table_name, table_create_query = table.values()
+            table_name, table_create_query, alterations = table.values()
             _log.info('Creating "%s" table, if it does not exist', table_name)
 
             with _mysql_database_cursor() as cursor:
                 cursor.execute(table_create_query)
+
+                for alteration in alterations:
+                    condition, alter_query = alteration.values()
+                    cursor.execute(condition)
+                    result, = cursor.fetchone()
+
+                    if not result:
+                        cursor.execute(alter_query)
 
     @classmethod
     def delete_all_rows_from_all_tables(cls):
@@ -305,26 +330,27 @@ class Storage:
             cursor.execute(query, (name, ))
 
     @staticmethod
-    def add_user(user_id: str, zone: timezone, team: Team):
+    def add_user(user_id: int, zone: timezone, team: Team, guild_id: str):
         """Add a user into the users table."""
         query = f"""
             INSERT INTO {Config.USERS_TABLE} (
                 userID,
                 timezone,
-                team
+                team,
+                guildID
             )
-            VALUES (%s, %s, %s);
+            VALUES (%s, %s, %s, %s);
         """
 
         zone_str = time(tzinfo=zone).strftime('%z')
-        team_str = team.value
+        values = user_id, zone_str, team.value, guild_id
 
         with _mysql_database_cursor() as cursor:
             try:
-                cursor.execute(query, (user_id, zone_str, team_str))
+                cursor.execute(query, values)
             except mysql.connector.errors.IntegrityError as exc:
                 user = Storage.get_user_by_id(user_id)
-                raise pombot.errors.UserAlreadyExistsError(user.team) from exc
+                raise pombot.errors.UserAlreadyExistsError(user) from exc
 
     @staticmethod
     def set_user_timezone(user_id: str, zone: timezone):
@@ -341,22 +367,37 @@ class Storage:
             cursor.execute(query, (zone_str, user_id))
 
     @staticmethod
-    def update_user_team(user_id: str, team: Team):
+    def update_user(user_id: str, *, team: Team = None, guild_id: int = None):
         """Set the user team."""
+        updates = []
+        values = []
+
+        if team:
+            updates += ["team=%s"]
+            values += [team.value]
+
+        if guild_id:
+            updates += ["guildID=%s"]
+            values += [guild_id]
+
+        if not updates:
+            return
+
         query = f"""
             UPDATE {Config.USERS_TABLE}
-            SET team=%s
-            WHERE userID=%s
+            SET {", ".join(updates)}
+            WHERE userID=%s;
         """
 
         with _mysql_database_cursor() as cursor:
-            cursor.execute(query, (team.value, user_id))
+            cursor.execute(query, (*values, user_id))
 
     @staticmethod
     def get_team_populations() -> Tuple[int, int]:
         """Get the number of players on each team.
 
-        @return Two numbers, the number of users on Knights and the number of users on Vikings
+        @return Two numbers, the number of users on Knights and the number of
+        users on Vikings.
         """
         query = f"""
             SELECT

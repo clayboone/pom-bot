@@ -134,6 +134,7 @@ class User:
     attack_level: int
     heavy_attack_level: int
     defend_level: int
+    guild_id: int
 
 
 @dataclass
