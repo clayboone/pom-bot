@@ -55,6 +55,7 @@ class Config:
     EVENTS_TABLE = "events"
     USERS_TABLE = "users"
     ACTIONS_TABLE = "actions"
+    ADMINS_TABLE = "pomwar_admins"
     MYSQL_CONNECTION_POOL_SIZE = _positive_int(
         os.getenv("MYSQL_CONNECTION_POOL_SIZE"))
 
@@ -138,6 +139,7 @@ class Reactions:
     ERROR = "🐛"
     FALLEN_LEAF = "🍂"
     LEAVES = "🍃"
+    PARTY = "🎉"
     ROBOT = "🤖"
     SHIELD = "🛡"
     TOMATO = "🍅"

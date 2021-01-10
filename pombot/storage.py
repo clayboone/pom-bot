@@ -9,7 +9,8 @@ from discord.user import User as DiscordUser
 
 import pombot.errors
 from pombot.config import Config, Secrets
-from pombot.lib.types import Action, ActionType, DateRange, Event, Pom, Team
+from pombot.lib.types import (
+    Action, ActionType, Admin, AdminLevel, DateRange, Event, Pom, Team)
 from pombot.lib.types import User as PombotUser
 
 _log = logging.getLogger(__name__)
@@ -39,7 +40,11 @@ def _mysql_database_cursor():
 
 
 def _replace_further_occurances(text: str, old: str, new: str) -> str:
-    offset = text.index(old) + 1
+    try:
+        offset = text.index(old) + 1
+    except ValueError:
+        return text
+
     return text[:offset] + text[offset:].replace(old, new)
 
 
@@ -104,6 +109,18 @@ class Storage:
                     """
                 }
             ]
+        },
+        {
+            "name": Config.ADMINS_TABLE,
+            "create_query": f"""
+                CREATE TABLE IF NOT EXISTS {Config.ADMINS_TABLE} (
+                    userID BIGINT(20) NOT NULL UNIQUE,
+                    level TINYINT(1) NOT NULL DEFAULT 1,
+                    promoted_by BIGINT(20) NOT NULL,
+                    PRIMARY KEY(userID)
+                );
+            """,
+            "alterations": []
         },
         {
             "name": Config.ACTIONS_TABLE,
@@ -531,3 +548,54 @@ class Storage:
 
 
         return [Action(*row) for row in rows]
+
+    @staticmethod
+    def get_admins(user_id: int = None, level: AdminLevel = None) -> List[Admin]:
+        """Get a list of admins.
+
+        @param user_id ID of a specific admin to retrieve.
+        @param level Minimum level of admins to return.
+        @return List of Admin users matching the criteria.
+        """
+        query = [f"SELECT * FROM {Config.ADMINS_TABLE}"]
+        values = []
+
+        if user_id:
+            query += ["WHERE userID=%s"]
+            values += [user_id]
+
+        if level:
+            query += ["WHERE level>=%s"]
+            values += [level.value]
+
+        query_str = _replace_further_occurances(" ".join(query), "WHERE", "AND")
+
+        with _mysql_database_cursor() as cursor:
+            cursor.execute(query_str, values)
+            rows = cursor.fetchall()
+
+        return {Admin(*r) for r in rows}
+
+    @staticmethod
+    def add_pomwar_admin(
+        user: DiscordUser,
+        level: AdminLevel,
+        promoter: DiscordUser,
+    ):
+        """Add an admin to the admins table."""
+        query = f"""
+            INSERT INTO {Config.ADMINS_TABLE} (
+                userID,
+                level,
+                promoted_by
+            )
+            VALUES (%s, %s, %s);
+        """
+        values = user.id, level.value, promoter.id
+
+        with _mysql_database_cursor() as cursor:
+            try:
+                cursor.execute(query, values)
+            except mysql.connector.IntegrityError as exc:
+                admin = Storage.get_admins(user_id=user.id)
+                raise pombot.errors.UserAlreadyExistsError(admin) from exc

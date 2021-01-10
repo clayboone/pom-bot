@@ -1,9 +1,10 @@
+import random
 from typing import Callable, Optional
 
 from discord.embeds import Embed
 from discord.ext.commands import Context
 
-from pombot.config import Config
+from pombot.config import Config, Reactions
 
 
 async def send_embed_message(
@@ -48,3 +49,23 @@ async def send_embed_message(
 
     # Allow the TypeError to bubble up when both ctx and _func are None.
     return await coro(embed=message)
+
+async def send_permission_denied_msg(ctx: Context):
+    """Reply to the user with a random "permission denied" message."""
+    message, *_ = random.choices([
+        "You do not have access to this command.",
+        "Sorry, that command is out-of-order.",
+        "!!! ACCESS DENIED !!! \\**whale noises\\**",
+        "Wir konnten die Smaragde nicht finden!",
+        "Do you smell that?",
+        "\\**(Windows XP startup sound)\\**",
+        "This is not the command you're looking for. \\**waves hand\\**",
+        "*noop*",
+        "Command permenently moved to a different folder.",
+        "This command is in another castle.",
+        "Okay, let me get my tools.. brb",
+        "(╯°□°）╯︵ ¡ƃuoɹʍ ʇuǝʍ ƃuıɥʇǝɯoS",
+    ])
+
+    await ctx.message.add_reaction(Reactions.ROBOT)
+    await ctx.send(message)

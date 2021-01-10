@@ -8,17 +8,17 @@ from functools import cache, partial
 from pathlib import Path
 from typing import Any, List, Union
 
+import discord.errors
 from discord.ext import commands
 from discord.ext.commands import Cog, Context
 from discord.ext.commands.bot import Bot
 from discord.user import User
-import discord.errors
 
 import pombot.errors
 from pombot.config import Config, Pomwars, Reactions
 from pombot.data import Locations
-from pombot.lib.messages import send_embed_message
-from pombot.lib.types import DateRange, Team, ActionType
+from pombot.lib.messages import send_embed_message, send_permission_denied_msg
+from pombot.lib.types import AdminLevel, DateRange, Team, ActionType
 from pombot.storage import Storage
 from pombot.state import State
 from pombot.scoreboard import Scoreboard
@@ -476,6 +476,40 @@ class PomWarsAdminCommands(commands.Cog):
         """Manually unload the pombot.cogs.pom_wars_commands."""
         await ctx.send("Unloading cog.")
         self.bot.unload_extension("pombot.cogs.pom_wars_commands")
+
+    # FIXME: new admin commands to swap users' teams.
+
+    # FIXME: new admin commands to remove user's entry in user table?
+
+    # FIXME: new admin command to add more admins
+
+    @commands.command(hidden=True)
+    async def iamgod(self, ctx: Context):
+        """A single-use command to register the head admin."""
+        if Storage.get_admins():
+            await send_permission_denied_msg(ctx)
+            return
+
+        # Storage.add_pomwar_admin takes the `id` attribute of a Discord `user`
+        # object for the promoter. For this specific command, there is no
+        # promoter, so we need to fake it.
+        class _FalseIdol:  # pylint: disable=too-few-public-methods
+            def __init__(self):
+                self.id = 0  # pylint: disable=invalid-name
+
+        Storage.add_pomwar_admin(
+            user=ctx.author,
+            level=AdminLevel.GOD,
+            promoter=_FalseIdol(),
+        )
+
+        for reaction in [
+                Reactions.CHECKMARK,
+                Reactions.BOOM,
+                Reactions.PARTY,
+                Reactions.ROBOT,
+        ]:
+            await ctx.message.add_reaction(reaction)
 
 
 def setup(bot: Bot):

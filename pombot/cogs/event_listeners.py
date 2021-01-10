@@ -1,11 +1,11 @@
 import logging
-import random
 import textwrap
 from typing import Any
 
 from discord.ext.commands import Bot, Cog, Context, errors
 
 from pombot.config import Config, Debug, Reactions, Secrets
+from pombot.lib.messages import send_permission_denied_msg
 from pombot.storage import Storage
 
 _log = logging.getLogger(__name__)
@@ -78,23 +78,7 @@ class EventListeners(Cog):
             return
 
         if isinstance(error, errors.CheckFailure):
-            message, *_ = random.choices([
-                "You do not have access to this command.",
-                "Sorry, that command is out-of-order.",
-                "!!! ACCESS DENIED !!! \\**whale noises\\**",
-                "Wir konnten die Smaragde nicht finden!",
-                "Do you smell that?",
-                "\\**(Windows XP startup sound)\\**",
-                "This is not the command you're looking for. \\**waves hand\\**",
-                "*noop*",
-                "Command permenently moved to a different folder.",
-                "This ~~princess~~ command is in another castle.",
-                "Okay, let me get my tools.. brb",
-                "(╯°□°）╯︵ ¡ƃuoɹʍ ʇuǝʍ ƃuıɥʇǝɯoS",
-            ])
-
-            await ctx.message.add_reaction(Reactions.ROBOT)
-            await ctx.send(message)
+            await send_permission_denied_msg(ctx)
             return
 
         for message in error.args:

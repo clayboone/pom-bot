@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from enum import Enum
+from enum import Enum, IntEnum
 
 from pombot.config import Pomwars
 
@@ -135,6 +135,21 @@ class User:
     heavy_attack_level: int
     defend_level: int
     guild_id: int
+
+
+class AdminLevel(IntEnum):
+    """The level of an admin."""
+    MODERATOR = 1
+    SENIOR_ADMIN = 80
+    GOD = 100
+
+
+@dataclass(frozen=True)
+class Admin:
+    """A admin, as described, in order, from the database."""
+    user_id: int
+    level: AdminLevel
+    promoted_by_id: int
 
 
 @dataclass
