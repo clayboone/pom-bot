@@ -5,6 +5,7 @@ from datetime import time, timezone
 from typing import List, Optional, Set, Tuple
 
 import mysql.connector
+from discord.guild import Guild
 from discord.user import User as DiscordUser
 
 import pombot.errors
@@ -115,6 +116,7 @@ class Storage:
             "create_query": f"""
                 CREATE TABLE IF NOT EXISTS {Config.ADMINS_TABLE} (
                     userID BIGINT(20) NOT NULL UNIQUE,
+                    guildID BIGINT(20) NOT NULL,
                     level TINYINT(1) NOT NULL DEFAULT 1,
                     promoted_by BIGINT(20) NOT NULL,
                     PRIMARY KEY(userID)
@@ -346,8 +348,8 @@ class Storage:
         with _mysql_database_cursor() as cursor:
             cursor.execute(query, (name, ))
 
-    @staticmethod
-    def add_user(user_id: int, zone: timezone, team: Team, guild_id: str):
+    @classmethod
+    def add_user(cls, user_id: int, zone: timezone, team: Team, guild_id: str):
         """Add a user into the users table."""
         query = f"""
             INSERT INTO {Config.USERS_TABLE} (
@@ -366,7 +368,7 @@ class Storage:
             try:
                 cursor.execute(query, values)
             except mysql.connector.errors.IntegrityError as exc:
-                user = Storage.get_user_by_id(user_id)
+                user = cls.get_user_by_id(user_id)
                 raise pombot.errors.UserAlreadyExistsError(user) from exc
 
     @staticmethod
@@ -550,7 +552,11 @@ class Storage:
         return [Action(*row) for row in rows]
 
     @staticmethod
-    def get_admins(user_id: int = None, level: AdminLevel = None) -> List[Admin]:
+    def get_admins(
+        user_id: int = None,
+        guild_id: int = None,
+        level: AdminLevel = None,
+    ) -> List[Admin]:
         """Get a list of admins.
 
         @param user_id ID of a specific admin to retrieve.
@@ -564,6 +570,10 @@ class Storage:
             query += ["WHERE userID=%s"]
             values += [user_id]
 
+        if guild_id:
+            query += ["WHERE guildID=%s"]
+            values += [guild_id]
+
         if level:
             query += ["WHERE level>=%s"]
             values += [level.value]
@@ -576,9 +586,16 @@ class Storage:
 
         return {Admin(*r) for r in rows}
 
-    @staticmethod
+    @classmethod
+    def is_admin(cls, user: DiscordUser, level: AdminLevel) -> bool:
+        admins = {u.user_id for u in cls.get_admins(level)}
+        return user.id in admins
+
+    @classmethod
     def add_pomwar_admin(
+        cls,
         user: DiscordUser,
+        guild: Guild,
         level: AdminLevel,
         promoter: DiscordUser,
     ):
@@ -586,16 +603,17 @@ class Storage:
         query = f"""
             INSERT INTO {Config.ADMINS_TABLE} (
                 userID,
+                guildID,
                 level,
                 promoted_by
             )
-            VALUES (%s, %s, %s);
+            VALUES (%s, %s, %s, %s);
         """
-        values = user.id, level.value, promoter.id
+        values = user.id, guild.id, level.value, promoter.id
 
         with _mysql_database_cursor() as cursor:
             try:
                 cursor.execute(query, values)
             except mysql.connector.IntegrityError as exc:
-                admin = Storage.get_admins(user_id=user.id)
+                admin = cls.get_admins(user_id=user.id)
                 raise pombot.errors.UserAlreadyExistsError(admin) from exc

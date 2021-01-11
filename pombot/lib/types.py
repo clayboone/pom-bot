@@ -139,15 +139,35 @@ class User:
 
 class AdminLevel(IntEnum):
     """The level of an admin."""
-    MODERATOR = 1
+    # Users with this level can:
+    # - Remove a user's row from the `users` table for their guild-only.
+    # - Change the team a user is on for any user on their guild.
+    MODERATOR = 20
+
+    # Users with this level can:
+    # - Do everything a moderator can do.
+    # - Add new moderators for their guild.
+    # - Remove moderators for their guild.
+    ADMIN = 60
+
+    # Users with this level can:
+    # - Do everything an admin can do.
+    # - Add new admins on any guild.
+    # - Remove admins on any guild.
     SENIOR_ADMIN = 80
-    GOD = 100
+
+    # Users with this level can:
+    # - Do everything listed so far.
+    # - Transfer head admin status to another user.
+    # - Unload the Pomwar cog and end the event.
+    HEAD_ADMIN = 100
 
 
 @dataclass(frozen=True)
 class Admin:
     """A admin, as described, in order, from the database."""
     user_id: int
+    guild_id: int
     level: AdminLevel
     promoted_by_id: int
 

@@ -471,9 +471,12 @@ class PomWarsAdminCommands(commands.Cog):
         self.bot = bot
 
     @commands.command(hidden=True)
-    @commands.has_any_role("Guardian")
     async def unload_pom_wars(self, ctx: Context):
         """Manually unload the pombot.cogs.pom_wars_commands."""
+        if not Storage.is_admin(ctx.author, AdminLevel.HEAD_ADMIN):
+            await send_permission_denied_msg(ctx)
+            return
+
         await ctx.send("Unloading cog.")
         self.bot.unload_extension("pombot.cogs.pom_wars_commands")
 
@@ -481,7 +484,32 @@ class PomWarsAdminCommands(commands.Cog):
 
     # FIXME: new admin commands to remove user's entry in user table?
 
-    # FIXME: new admin command to add more admins
+    @commands.command(hidden=True)
+    async def putgroup(self, ctx: Context, *, user: str, group: str):
+        """Promote a user to the next available admin level."""
+        if not Storage.is_admin(ctx.author, AdminLevel.ADMIN):
+            await send_permission_denied_msg(ctx)
+            return
+
+        try:
+            promotee = await ctx.guild.fetch_member(
+                int(user.strip("<>").removeprefix("@!")))
+        except discord.errors.NotFound as exc:
+            await ctx.send(f"{exc.text}: {user}")
+            await ctx.message.add_reaction(Reactions.WARNING)
+            return
+        except ValueError:
+            await ctx.send("(☞ﾟヮﾟ)☞ Please remember to `@tag` the username.")
+            await ctx.message.add_reaction(Reactions.ROBOT)
+            return
+
+        promotion_funcs = {
+            AdminLevel.MODERATOR: ,
+            AdminLevel.ADMIN: ,
+            AdminLevel.SENIOR_ADMIN: ,
+            AdminLevel.HEAD_ADMIN: ,
+        }
+        # FIXME: you are obviously here
 
     @commands.command(hidden=True)
     async def iamgod(self, ctx: Context):
@@ -490,16 +518,17 @@ class PomWarsAdminCommands(commands.Cog):
             await send_permission_denied_msg(ctx)
             return
 
-        # Storage.add_pomwar_admin takes the `id` attribute of a Discord `user`
-        # object for the promoter. For this specific command, there is no
-        # promoter, so we need to fake it.
+        # Storage.add_pomwar_admin takes the id attribute of the Discord User
+        # and Guild objects for the promoter. For this specific command, there
+        # is no promoter, and it operates across all guilds, so we fake the id.
         class _FalseIdol:  # pylint: disable=too-few-public-methods
             def __init__(self):
                 self.id = 0  # pylint: disable=invalid-name
 
         Storage.add_pomwar_admin(
             user=ctx.author,
-            level=AdminLevel.GOD,
+            guild=_FalseIdol(),
+            level=AdminLevel.HEAD_ADMIN,
             promoter=_FalseIdol(),
         )
 
