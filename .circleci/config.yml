@@ -1,0 +1,55 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/pom-bot
+    docker:
+      - image: circleci/python:3.9
+        environment:
+          ADMIN_ROLES: ""
+          DISCORD_TOKEN : "0"
+          POM_CHANNEL_NAMES : "pom-bank"
+          MYSQL_HOST : "127.0.0.1"
+          MYSQL_USER : "root"
+          MYSQL_PASSWORD : "rootpass"
+          MYSQL_DATABASE : ""
+          TEST_DATABASE : "_test_pombot"
+          ERRORS_CHANNEL_NAME : "errors"
+          BASE_DAMAGE_FOR_NORMAL_ATTACKS : "10"
+          BASE_DAMAGE_FOR_HEAVY_ATTACKS : "40"
+          JOIN_CHANNEL_NAME: "the-draft"
+          KNIGHT_ONLY_GUILDS: ""
+          VIKING_ONLY_GUILDS: ""
+      - image: circleci/mysql:8.0.20
+        command: [--default-authentication-plugin=mysql_native_password]
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpass
+    steps:
+      - checkout
+      - run:
+          name: Install MySQL
+          command: |
+            sudo apt-get update
+            sudo apt-get install default-mysql-client
+      - run:
+          name: Wait for database
+          command: |
+            for i in `seq 1 600`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for database && exit 1
+      - run: 
+          name: Database setup
+          command: mysql -u root -prootpass -h "127.0.0.1" -e "CREATE DATABASE _test_pombot;"
+      - run: 
+          name: Install Python requirements
+          command: pip install -r requirements.txt
+      - run:
+          name: Test
+          command: make test
+      - run: 
+          name: Lint
+          command: make lint
