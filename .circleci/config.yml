@@ -41,15 +41,15 @@ jobs:
               sleep 1
             done
             echo Failed waiting for database && exit 1
-      - run: 
+      - run:
           name: Database setup
           command: mysql -u root -prootpass -h "127.0.0.1" -e "CREATE DATABASE _test_pombot;"
-      - run: 
+      - run:
           name: Install Python requirements
           command: pip install -r requirements.txt
       - run:
           name: Test
           command: make test
-      - run: 
+      - run:
           name: Lint
           command: make lint
