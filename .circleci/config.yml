@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  test_and_lint:
     working_directory: ~/pom-bot
     docker:
       - image: circleci/python:3.9
@@ -53,3 +53,8 @@ jobs:
       - run:
           name: Lint
           command: make lint
+workflows:
+  version: 2
+  test_and_lint:
+    jobs:
+      - test_and_lint
