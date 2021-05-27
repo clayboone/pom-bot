@@ -12,7 +12,7 @@
 
 ### 11/28/2020
 
-**Colin** - I think we should stick with the original system for right now. Each team starts with 0 "hitpoints" and as they move forward the team that takes the least damage wins. Something to consult Mikymac on. 
+**Colin** - I think we should stick with the original system for right now. Each team starts with 0 "hitpoints" and as they move forward the team that takes the least damage wins. Something to consult Mikymac on.
 
 ## Spec Sheet
 
@@ -38,7 +38,7 @@
             - Any balance changes would be sent in war channels and pinned by the bot.
     - Players can team up to perform an action.
 
-> Users should not be able to exploit these three actions. Users must also feel motivated to take on a particular strategy. It's up to us to add the magic, making it fun to participate and ensuring that it doesn't break down in any one place. 
+> Users should not be able to exploit these three actions. Users must also feel motivated to take on a particular strategy. It's up to us to add the magic, making it fun to participate and ensuring that it doesn't break down in any one place.
 
 - [ ] Setting up our partners for event
     - Alex is working on acquiring partners for the event.
