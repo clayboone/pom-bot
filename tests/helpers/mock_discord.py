@@ -97,7 +97,7 @@ class AsyncCheckRaiseResponse(unittest.mock.AsyncMock):
         """
         # Call super() first because it sets call counts and called args. We
         # still want to investigate that stuff even if we raise.
-        super().__call__(*args, **kwargs)
+        await super().__call__(*args, **kwargs)
 
         if args and sum(len(a) for a in args) > Limits.MAX_CHARACTERS_PER_MESSAGE:
             self.raise_bad_request("args")

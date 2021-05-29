@@ -1,10 +1,12 @@
 import textwrap
 from collections import Counter
+from dataclasses import dataclass
 from datetime import timedelta
 from functools import partial
-from typing import Iterator, List, Optional
+from typing import Callable, Iterator, List, Optional, Tuple
 
 from discord.ext.commands import Context
+from discord.message import Message
 from discord.errors import HTTPException
 
 from pombot.config import Config, Debug, Reactions
@@ -142,46 +144,100 @@ async def do_poms(ctx: Context, *args):
             _func=(ctx.send if Debug.POMS_COMMAND_IS_PUBLIC else ctx.author.send),
         )
     except HTTPException:
-        for session in (current_session, banked_session):
-            field = session.get_message_field()
-
-            if len(field.value) <= Limits.MAX_EMBED_FIELD_VALUE:
-                await send_embed_message(
-                    None,
-                    title="Your pom statistics",
-                    description=current_session.get_session_started_message(),
-                    thumbnail=ctx.author.avatar_url,
-                    fields=[session.get_message_field()],
-                    footer=footer,
-                    _func=ctx.author.send if not Debug.POMS_COMMAND_IS_PUBLIC else ctx.send,
-                )
-                continue
-
-            message = normalize_and_dedent("""
-                ```fix
-
-                The combined length of all the pom descriptions in your
-                {session_type} is longer than the maximum embed message field
-                size for Discord embeds ({length}, Max is {max_length}). Please
-                rename a few with !poms.rename (see !help {cmd}).```
-            """.format(
-                session_type=session.type.value.lower(),
-                length=len(session.get_message_field().value),
-                max_length=Limits.MAX_EMBED_FIELD_VALUE,
-                cmd="poms" if session.type == SessionType.CURRENT else "bank",
-            ))
-
-            await (ctx.author.send(message)
-                    if not Debug.POMS_COMMAND_IS_PUBLIC else ctx.send(message))
-
-            for message in session.iter_message_field(
-                    max_length=Limits.MAX_CHARACTERS_PER_MESSAGE - 100):
-                await (ctx.author.send(message)
-                       if not Debug.POMS_COMMAND_IS_PUBLIC else ctx.send(message))
+        for response in generate_message_too_long_responses(
+                ctx, footer, (current_session, banked_session)):
+            await response.send()
 
         await ctx.message.add_reaction(Reactions.ROBOT)
     else:
         await ctx.message.add_reaction(Reactions.CHECKMARK)
+
+
+@dataclass
+class _Response:
+    is_embed_message: bool
+    args: tuple = None
+    kwargs: dict = None
+    _func: Callable = None
+
+    async def send(self) -> Message:
+        """Send this message.
+
+        @raises TypeError if is_embed_message False and _func is None.
+        @return The Discord message delivered.
+        """
+        args = self.args or tuple()
+        kwargs = self.kwargs or dict()
+
+        if self.is_embed_message:
+            return await send_embed_message(*args, **kwargs)
+
+        return await self._func(*args, **kwargs)
+
+
+def generate_message_too_long_responses(
+    ctx: Context,
+    footer: str,
+    sessions: Tuple,
+) -> List[_Response]:
+    """Generate an ordered list of messages to be sent instead of a single
+    embed when the !poms embed is too long.
+
+    The "current session" is determined automatically.
+
+    @param ctx The context originally sent to the callback.
+    @param footer The footer to be included in the new embed(s).
+    @param session Tuple of _Session objects representing the embed fields that
+           were too long.
+    @return Ordered list of _Response objects.
+    """
+    responses: List[_Response] = []
+    current_session = next(s for s in sessions if s.type == SessionType.CURRENT)
+    normal_response = lambda msg: _Response(
+        is_embed_message=False,
+        args=(msg, ),
+        _func=(ctx.author.send
+               if not Debug.POMS_COMMAND_IS_PUBLIC else ctx.send))
+
+    for session in sessions:
+        field = session.get_message_field()
+
+        if len(field.value) <= Limits.MAX_EMBED_FIELD_VALUE:
+            responses.append(_Response(
+                is_embed_message=True,
+                args=(None,),
+                kwargs={
+                    "title": "Your pom statistics",
+                    "description": current_session.get_session_started_message(),
+                    "thumbnail": ctx.author.avatar_url,
+                    "fields": [session.get_message_field()],
+                    "footer": footer,
+                    "_func": (ctx.author.send
+                              if not Debug.POMS_COMMAND_IS_PUBLIC else ctx.send),
+                }
+            ))
+            continue
+
+        message = normalize_and_dedent("""
+            ```fix
+
+            The combined length of all the pom descriptions in your
+            {session_type} is longer than the maximum embed message field
+            size for Discord embeds ({length}, Max is {max_length}). Please
+            rename a few with !{cmd}.rename (see !help {cmd}).```
+        """.format(
+            session_type=session.type.value.lower(),
+            length=len(session.get_message_field().value),
+            max_length=Limits.MAX_EMBED_FIELD_VALUE,
+            cmd="poms" if session.type == SessionType.CURRENT else "bank",
+        ))
+        responses.append(normal_response(message))
+
+        for message in session.iter_message_field(
+                max_length=Limits.MAX_CHARACTERS_PER_MESSAGE - 100):
+            responses.append(normal_response(message))
+
+    return sorted(responses, key=lambda r: not r.is_embed_message)
 
 
 class _Session:
