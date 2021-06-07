@@ -1,137 +1,98 @@
-import json
-from pathlib import Path
 from string import Template
 
 from discord.ext.commands import Bot
 from discord.user import User as DiscordUser
 
 from pombot.config import Pomwars
-from pombot.data import Locations
 from pombot.lib.types import User as BotUser
 from pombot.lib.pom_wars.team import get_user_team
 from pombot.lib.tiny_tools import normalize_newlines
 
 
 class Attack:
-    """An attack action as specified by file and directory structure."""
-    def __init__(self, directory: Path, is_heavy: bool, is_critical: bool):
-        self.name = directory.name
-        self.is_heavy = is_heavy
-        self.is_critical = is_critical
-        self._message = (directory / Locations.MESSAGE).read_text(encoding="utf8")
-        self._meta = (directory / Locations.META).read_text(encoding="utf8")
-
-        self.chance_for_this_action = None
-        self.damage_multiplier = None
-        for key, val in json.loads(self._meta).items():
-            setattr(self, key, val)
+    """An attack constructable from an actions XML element."""
+    def __init__(self, story: str, is_heavy: bool, is_critical: bool):
+        self._story = story
+        self._is_heavy = is_heavy
+        self._is_critical = is_critical
 
     @property
     def damage(self):
-        """The configured base damage for this action."""
-        base_damage = Pomwars.BASE_DAMAGE_FOR_NORMAL_ATTACKS
+        """Return the total damage this attack produces after heavy- and
+        critical- modifiers.
+        """
+        normal_dmg = Pomwars.BASE_DAMAGE_FOR_NORMAL_ATTACKS
+        heavy_dmg = Pomwars.BASE_DAMAGE_FOR_HEAVY_ATTACKS
+        base_damage = heavy_dmg if self._is_heavy else normal_dmg
 
-        if self.is_heavy:
-            base_damage = Pomwars.BASE_DAMAGE_FOR_HEAVY_ATTACKS
+        if self._is_critical:
+            return base_damage * Pomwars.DAMAGE_MULTIPLIER_FOR_CRITICAL
 
-        return base_damage * self.damage_multiplier
-
-    @property
-    def weight(self):
-        """The configured base weighted-chance for this action."""
-        return self.chance_for_this_action
+        return base_damage
 
     def get_message(self, adjusted_damage: int = None) -> str:
-        """The markdown-formatted version of the message.txt from the
-        action's directory, and its result, as a string.
+        """Return the effect and the markdown-formatted story for this attack as
+        a combined string.
         """
         dmg = adjusted_damage or self.damage
         dmg_str = f"{dmg:.1f}" if dmg % 1 else str(int(dmg))
         message_lines = [f"** **\n{Pomwars.Emotes.ATTACK} `{dmg_str} damage!`"]
 
-        if self.is_critical:
+        if self._is_critical:
             message_lines += [f"{Pomwars.Emotes.CRITICAL} `Critical attack!`"]
 
         action_result = "\n".join(message_lines)
-        formatted_story = "*" + normalize_newlines(self._message) + "*"
+        formatted_story = "*" + normalize_newlines(self._story) + "*"
 
         return "\n\n".join([action_result, formatted_story])
 
     def get_title(self, user: DiscordUser) -> str:
         """Title that includes the name of the team user attacked."""
-
         title = "You have used{indicator}Attack against {team}!".format(
-            indicator = " Heavy " if self.is_heavy else " ",
+            indicator = " Heavy " if self._is_heavy else " ",
             team=f"{(~get_user_team(user)).value}s",
         )
 
         return title
 
-    def get_colour(self) -> int:
-        """
-        Change the colour if attack is heavy or not.
-        """
-        colour = Pomwars.NORMAL_COLOUR
-
-        if self.is_heavy:
-            colour = Pomwars.HEAVY_COLOUR
-
-        return colour
+    @property
+    def colour(self) -> int:
+        """Return an embed colour based on whether the attack is heavy."""
+        return (Pomwars.HEAVY_ATTACK_COLOUR
+                if self._is_heavy else Pomwars.NORMAL_ATTACK_COLOUR)
 
 
 class Defend:
-    """A defend action as specified by file and directory structure."""
-    def __init__(self, directory: Path):
-        self.name = directory.name
-        self._message = (directory / Locations.MESSAGE).read_text(encoding="utf8")
-        self._meta = (directory / Locations.META).read_text(encoding="utf8")
-
-        self.chance_for_this_action = None
-        for key, val in json.loads(self._meta).items():
-            setattr(self, key, val)
-
-    @property
-    def weight(self):
-        """The configured base weighted-chance for this action."""
-        return self.chance_for_this_action
+    """A defend constructable from an actions XML element."""
+    def __init__(self, story: str):
+        self._story = story
 
     def get_message(self, user: BotUser) -> str:
-        """The markdown-formatted version of the message.txt from the
-        action's directory, and its result, as a string.
+        """Return the effect and the markdown-formatted story for this defend
+        as a combined string.
         """
-        formatted_story = "*" + normalize_newlines(self._message) + "*"
         action_result = "** **\n{emt} `{dfn:.0f}% team damage reduction!`".format(
             emt=Pomwars.Emotes.DEFEND,
             dfn=100 * Pomwars.DEFEND_LEVEL_MULTIPLIERS[user.defend_level],
         )
+        formatted_story = "*" + normalize_newlines(self._story) + "*"
 
         return "\n\n".join([action_result, formatted_story])
 
 
 class Bribe:
-    """Fun replies when users try and bribe the bot."""
-    def __init__(self, directory: Path):
-        self.name = directory.name
-        self._message = (directory / Locations.MESSAGE).read_text(encoding="utf8")
-        self._meta = (directory / Locations.META).read_text(encoding="utf8")
-
-        self.chance_for_this_action = None
-        for key, val in json.loads(self._meta).items():
-            setattr(self, key, val)
-
-    @property
-    def weight(self):
-        """The configured base weighted-chance for this action."""
-        return self.chance_for_this_action
+    """A bribe constructable from an actions XML element."""
+    def __init__(self, story: str):
+        self._story = story
 
     def get_message(self, user: DiscordUser, bot: Bot) -> str:
-        """The markdown-formatted version of the message.txt from the
-        action's directory, and its result, as a string.
+        """Return the markdown-formatted story for this bribe as a combined
+        string.
         """
-
-        story = Template(normalize_newlines(self._message))
+        story = Template(normalize_newlines(self._story))
 
         return story.safe_substitute(
+            NAME=user.name,
             DISPLAY_NAME=user.display_name,
             DISCRIMINATOR=user.discriminator,
             BOTNAME=bot.user.name

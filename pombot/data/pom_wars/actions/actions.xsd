@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:complexType name="attackType">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute name="is_critical" type="xs:boolean" default="false"/>
+        </xs:extension>
+    </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="teamType">
+    <xs:choice maxOccurs="unbounded">
+        <xs:element name="defend" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="heavy_attack" type="attackType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="normal_attack" type="attackType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="name" use="required">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="Knight"/>
+                <xs:enumeration value="Viking"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+</xs:complexType>
+
+<xs:element name="actions">
+    <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="bribe" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="team" type="teamType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

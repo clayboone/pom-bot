@@ -4,13 +4,13 @@ from datetime import datetime
 from discord.ext.commands import Context
 
 import pombot.lib.pom_wars.errors as war_crimes
-from pombot.config import Config, Pomwars, Reactions
-from pombot.data import Locations
-from pombot.data.pom_wars import load_actions_directories
+from pombot.config import Pomwars, Reactions
+from pombot.data.pom_wars.actions import Defends
+from pombot.lib.errors import DescriptionTooLongError
 from pombot.lib.messages import send_embed_message
 from pombot.lib.pom_wars.action_chances import is_action_successful
+from pombot.lib.pom_wars.dedup_tools import check_user_add_pom
 from pombot.lib.pom_wars.team import get_user_team
-from pombot.lib.pom_wars.types import Defend
 from pombot.lib.storage import Storage
 from pombot.lib.types import ActionType
 
@@ -21,25 +21,9 @@ async def do_defend(ctx: Context, *args):
     timestamp = datetime.now()
 
     try:
-        defender = await Storage.get_user_by_id(ctx.author.id)
-    except war_crimes.UserDoesNotExistError:
-        await ctx.reply("How did you get in here? You haven't joined the war!")
-        await ctx.message.add_reaction(Reactions.ROBOT)
+        defender = await check_user_add_pom(ctx, description, timestamp)
+    except (war_crimes.UserDoesNotExistError, DescriptionTooLongError):
         return
-
-    if len(description) > Config.DESCRIPTION_LIMIT:
-        await ctx.message.add_reaction(Reactions.WARNING)
-        await ctx.send(f"{ctx.author.mention}, your pom description must "
-                        f"be fewer than {Config.DESCRIPTION_LIMIT} characters.")
-        return
-
-    await Storage.add_poms_to_user_session(
-        ctx.author,
-        descript=description,
-        count=1,
-        time_set=timestamp,
-    )
-    await ctx.message.add_reaction(Reactions.TOMATO)
 
     action = {
         "user":           ctx.author,
@@ -61,9 +45,7 @@ async def do_defend(ctx: Context, *args):
     action["was_successful"] = True
     await ctx.message.add_reaction(Reactions.SHIELD)
 
-    defends = load_actions_directories(Locations.DEFENDS_DIR, type_=Defend)
-    weights = [defend.weight for defend in defends]
-    defend, = random.choices(defends, weights=weights)
+    defend = Defends.get_random(team=action["team"])
 
     await Storage.add_pom_war_action(**action)
 

@@ -8,18 +8,6 @@ from pombot.lib.storage import Storage
 from pombot.lib.types import ActionType
 
 
-def get_user_team(user: User) -> str:
-    team_roles = [
-        role for role in user.roles
-        if role.name in [Pomwars.KNIGHT_ROLE, Pomwars.VIKING_ROLE]
-    ]
-
-    if len(team_roles) != 1:
-        raise war_crimes.InvalidNumberOfRolesError()
-
-    return Team(team_roles[0].name)
-
-
 class Team(str, Enum):
     """Team that a user can be on."""
     KNIGHTS = Pomwars.KNIGHT_ROLE
@@ -62,3 +50,21 @@ class Team(str, Enum):
     async def population(self) -> int:
         """The team's population."""
         return await Storage.count_rows_in_table(Config.USERS_TABLE, team=self.value)
+
+
+def get_user_team(user: User) -> Team:
+    """Find a Discord user's team based on their roles.
+
+    @param user The Discord user object (eg. ctx.author).
+    @raises InvalidNumberOfRolesError when not on a team or on multiple teams.
+    @return Team object.
+    """
+    team_roles = [
+        role for role in user.roles
+        if role.name in [Pomwars.KNIGHT_ROLE, Pomwars.VIKING_ROLE]
+    ]
+
+    if len(team_roles) != 1:
+        raise war_crimes.InvalidNumberOfRolesError()
+
+    return Team(team_roles[0].name)

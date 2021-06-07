@@ -4,13 +4,13 @@ from datetime import datetime, timedelta
 from discord.ext.commands import Context
 
 import pombot.lib.pom_wars.errors as war_crimes
-from pombot.config import Config, Debug, Pomwars, Reactions
-from pombot.data import Locations
-from pombot.data.pom_wars import load_actions_directories
+from pombot.config import Debug, Pomwars, Reactions
+from pombot.data.pom_wars.actions import Attacks
+from pombot.lib.errors import DescriptionTooLongError
 from pombot.lib.messages import send_embed_message
 from pombot.lib.pom_wars.action_chances import is_action_successful
+from pombot.lib.pom_wars.dedup_tools import check_user_add_pom
 from pombot.lib.pom_wars.team import get_user_team
-from pombot.lib.pom_wars.types import Attack
 from pombot.lib.storage import Storage
 from pombot.lib.types import ActionType, DateRange
 from pombot.state import State
@@ -40,25 +40,9 @@ async def do_attack(ctx: Context, *args):
     description = " ".join(args[1:] if heavy_attack else args)
 
     try:
-        _ = await Storage.get_user_by_id(ctx.author.id)
-    except war_crimes.UserDoesNotExistError:
-        await ctx.reply("How did you get in here? You haven't joined the war!")
-        await ctx.message.add_reaction(Reactions.ROBOT)
+        _ = await check_user_add_pom(ctx, description, timestamp)
+    except (war_crimes.UserDoesNotExistError, DescriptionTooLongError):
         return
-
-    if len(description) > Config.DESCRIPTION_LIMIT:
-        await ctx.message.add_reaction(Reactions.WARNING)
-        await ctx.send(f"{ctx.author.mention}, your pom description must "
-                        f"be fewer than {Config.DESCRIPTION_LIMIT} characters.")
-        return
-
-    await Storage.add_poms_to_user_session(
-        ctx.author,
-        description,
-        count=1,
-        time_set=timestamp,
-    )
-    await ctx.message.add_reaction(Reactions.TOMATO)
 
     action = {
         "user":           ctx.author,
@@ -82,14 +66,11 @@ async def do_attack(ctx: Context, *args):
     action["was_critical"] = random.random() <= Pomwars.BASE_CHANCE_FOR_CRITICAL
     await ctx.message.add_reaction(Reactions.BOOM)
 
-    attacks = load_actions_directories(
-        Locations.HEAVY_ATTACKS_DIR if heavy_attack else Locations.NORMAL_ATTACKS_DIR,
-        type_=Attack,
-        is_critical=action["was_critical"],
-        is_heavy=heavy_attack,
+    attack = Attacks.get_random(
+        team=action["team"],
+        critical=action["was_critical"],
+        heavy=heavy_attack,
     )
-    weights = [attack.weight for attack in attacks]
-    attack, = random.choices(attacks, weights=weights)
 
     defensive_multiplier = await _get_defensive_multiplier(
         team=(~get_user_team(ctx.author)).value,
@@ -103,7 +84,7 @@ async def do_attack(ctx: Context, *args):
         title=attack.get_title(ctx.author),
         description=attack.get_message(action["damage"]),
         icon_url=None,
-        colour=attack.get_colour(),
+        colour=attack.colour,
         _func=ctx.reply,
     )
 

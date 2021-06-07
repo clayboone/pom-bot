@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <team name="Knight">
+        <normal_attack is_critical="true">Second breakfast is the second most important meal of the day. They will regret interrupting you. Butter knife in hand, you ready yourself.</normal_attack>
+        <normal_attack is_critical="true">You dump a bushel of poisoned tomatoes into the enemy castle’s well. Now they have all the ingredients for a BLT of death.</normal_attack>
+        <normal_attack is_critical="true">You gather all of the putrid rotting tomatoes you can find and hurl them at the enemy who, unable to stand the stench, jump into their moat. Easy pickings.</normal_attack>
+        <normal_attack is_critical="true">You mix together three drops of ale, a handful of dried chilli peppers and a viking booger. Shaking the vial up, you lob it across the enemy lines. Alchemy!</normal_attack>
+        <normal_attack is_critical="true">You slash with blazing speed with your urumi given to you by the warriors out east.</normal_attack>
+        <normal_attack is_critical="true">You spot some smoke in the distance and go out to explore. You are rewarded for your diligence, finding a lone, yet formidable warrior who agrees to join you on his way to Bebbanburg.</normal_attack>
+        <normal_attack is_critical="true">You stumble across a sign on a road leading from your opponents' castle. To the left it says, "To the enemy castle!" To the right it says, "Beware, wild bears!" Obviously, you switch the signs.</normal_attack>
+        <normal_attack is_critical="true">You take charge, coordinating with the rest of your party to launch your attack at the same time. The devastation caused by the teamwork is significantly higher. That Knight was right about jolly cooperation.</normal_attack>
+        <normal_attack is_critical="true">Your warriors elect you to sneak into the enemy fort undetected come nightfall. Things quickly get out of hand as they mistake you as one of them. One thing leads to another, and before you know it you spend the night drinking mead. A lot of mead.</normal_attack>
+        <normal_attack>"He ran into my sword! He ran into my sword ten times!"</normal_attack>
+        <normal_attack>"No, I said to take him out! Not invite him over for a nice dinner."</normal_attack>
+        <normal_attack>A trader from frankia offers you his crossbow for some trinket you found on your travels. You're now the most technologically advanced warrior in your region.</normal_attack>
+        <normal_attack>A yell and a gurgle eminates from the distance. Either someone has broken into the ale stores, or your leaf trap was successful.</normal_attack>
+        <normal_attack>Academia didn't turn out to be your thing, so you left to become a warrior. To your surprise, all of those long nights of studying battle strategy payed off. Thanks Mom.</normal_attack>
+        <normal_attack>After dark, you coat your weapons with oils you made from berries in the woods. Even the tiniest cut will inflict much greater damage.</normal_attack>
+        <normal_attack>As the axe comes down you raise your shield at the last second, parrying the mighty blow. The enemy grumbles in annoyance and swings again, but this time.. this time you're ready.</normal_attack>
+        <normal_attack>As the fog lifts, it unveils a gap in the enemies flanks. You take full advantage and charge in for the attack.</normal_attack>
+        <normal_attack>Deep breath in, steady breath out. You aim for the lookout in the enemy tower. You hold your breath and release the string. This is your favorite hobby, and the guards hate you for it.</normal_attack>
+        <normal_attack>Good old fashioned bow, good old fashioned arrow. You know what happens next.</normal_attack>
+        <normal_attack>Hiding in the upper branches of a tree, a band of enemy warriors pass beneath you. Taking out your slingshot, your shot lands right between the eyes of the big one with the battleaxe. Thinking they're under attack, the rest flee.</normal_attack>
+        <normal_attack>Inhaling the brisk air, you take a take a second to listen to the sounds around you, looking out for every small movement. A twig snaps and you let loose your bow on the forest line, your arrow finding its target. You carve off another notch on your bow to brag to your friends.</normal_attack>
+        <normal_attack>It's a clear day, and the weather is perfect for picking off enemy scouts. What more could an archer want?</normal_attack>
+        <normal_attack>Kicking leaves around your encampment you stumble across a rock. This quickly becomes your favorite weapon. No one understands why.</normal_attack>
+        <normal_attack>Meditating isn't just for monks. Your increased focus allows you to propel your axe through your enemies at a greater speed!</normal_attack>
+        <normal_attack>Scaling the walls of the enemy castle, you're able to identify a weak point and stab your sword through. You hit something soft and fleshy. Success!</normal_attack>
+        <normal_attack>Sword in hand, you glide through the battlefield, dodging and jabbing as your opponents fall around you.</normal_attack>
+        <normal_attack>The enemy tribe watching you approach cries with laughter at the size of your dagger. Right up until the moment they realize you have them surrounded.</normal_attack>
+        <normal_attack>The gate of the enemy castle opens to let reinforcements inside. You take the chance to get a few arrows in before it's quickly closed.</normal_attack>
+        <normal_attack>The last thing the enemy warrior heard was the whistling of your arrow piercing through the air.</normal_attack>
+        <normal_attack>The moats means you can't just sneak up and scale the castle walls, but that really doesn't matter if you manage to sneak in close enough for the fire arrows to reach them.</normal_attack>
+        <normal_attack>The shadows of the forest cloak you as you make your way to the enemy castle. Rewarded for your stealthiness, you ambush a marauding enemy group. Finishing just in time to make it back for dinner.</normal_attack>
+        <normal_attack>The tall grass seemed like the perfect hiding spot, so you didn't expect a group of warriors to walk that close. After a few heart-stopping moments, they leave you unnoticed and you can take them out one by one with a few quick arrows.</normal_attack>
+        <normal_attack>There are a number of broken arrows on the battlefield. You collect them and launch them towards the enemy castle. The whistling sound they make while flying is quite satisfying.</normal_attack>
+        <normal_attack>Through the mist you see your target and quietly release your bow with a satisfied smirk. Enemy neutralized.</normal_attack>
+        <normal_attack>Unfortunately, you accidentally knock over your box of poison dipped darts from the tree branch you're hiding on. Fortunately, at that exact moment an enemy regiment happened to be passing below.</normal_attack>
+        <normal_attack>With bated breath you hide in the forest's trees, waiting to attack the castle, when an enemy troop comes by. You attack the commanding officer and deal a mighty blow! They decide to take a short nap.</normal_attack>
+        <normal_attack>With the warm sunlight beating down, you always your mind to drift slightly. You return sharply to reality when you hear the wooshing sound of an arrow narrowly missing your head. You quickly focus on the direction the arrow came from and return the favour. You just happen to be slightly more accurate than them.</normal_attack>
+        <normal_attack>You are the warrior bard. Although they may have laughed at your career choice, you prove deadly on the battlefield; rallying the morale of warriors and strengthening resolve as you charge into battle.</normal_attack>
+        <normal_attack>You can feel the hair on the back of your neck rise, you turn around just in time to see the enemy approach with a small dagger. A quick roll to the side and their element of surprise is lost.</normal_attack>
+        <normal_attack>You deftly let loose an arrow. With a soft whistle it hits its target and falls to the ground, taking an enemy warrior with it. Bullseye.</normal_attack>
+        <normal_attack>You find a band of drunkards and convince them the enemy is stealing their ale! You're surprised how well that worked.</normal_attack>
+        <normal_attack>You find a bard in the middle of the woods. Unsure what he's doing there, you approach cautiously. He knows many songs of glorious battles. You learn a thing or two.</normal_attack>
+        <normal_attack>You find some wild berries in the forest. Under the cover of night, you manage to poison the enemy's water supply. They realise too late and take a heavy blow to their numbers.</normal_attack>
+        <normal_attack>You gain the loyalty of a wolf by saving its life when it was badly wounded. When finally healed, she saves your life from a mercenary hired to kill you. You find you're now a dog person.</normal_attack>
+        <normal_attack>You get up, stretch your limbs and mutter to yourself: "Alright, let's do this!"</normal_attack>
+        <normal_attack>You helped a Viking end a blood fued. With no further issues to resolve, he joins your ranks in search of glory.</normal_attack>
+        <normal_attack>You hold your breath until the enemy warrior walks by the tree you are hiding behind. One quick smooth blow knocks him out. You decide not to kill him because he seems like an overall nice guy.</normal_attack>
+        <normal_attack>You learn the art of spear fishing. You use your new spear for battles and delicious meals alike.</normal_attack>
+        <normal_attack>You learn the art of spear fishing. You use your new spear for battles and delicious meals alike.</normal_attack>
+        <normal_attack>You lower the drawbridge a bit faster than you intended. Good thing those were enemy warriors.</normal_attack>
+        <normal_attack>You pick up a flail, uncertain of what to do as your enemy approaches. Suddenly, your friend shouts your name and you swing round to respond. You hear a thud behind you and turn back to see your opponent lying there on the ground. That definitely counts.</normal_attack>
+        <normal_attack>You protect a group of monks from a raiding band of vikings. They teach you the local language, allowing you to trade with their people.</normal_attack>
+        <normal_attack>You pull a blanket of leaves over the hole you just finished digging. Before too long, a group of scary looking warriors fall in. The first one, you expected. But the sixth one?</normal_attack>
+        <normal_attack>You remember a story you once read that gives you an idea. You and another soldier flank the enemy from both sides and launch an attack simultaneously! It was very effective.</normal_attack>
+        <normal_attack>You see a faint glimmer eminating from the castle wall. It fades for a second, but flickers again. It's the sunlight reflecting off the armour of an enemy warrior. You aim, and release the string of your bow with a satisfying thud. Nice.</normal_attack>
+        <normal_attack>You spend time with a wealthy merchant who teaches you the art of medieval politics and economics. You find that the pen is mightier than the sword.</normal_attack>
+        <normal_attack>You take charge, coordinating with the rest of your party to launch your attack at the same time. The devastation caused by the teamwork is significantly higher. Solaire was right!</normal_attack>
+    </team>
+    <team name="Viking">
+        <normal_attack is_critical="true">Second breakfast is the second most important meal of the day. They will regret interrupting you. Butter knife in hand, you ready yourself.</normal_attack>
+        <normal_attack is_critical="true">You dump a bushel of poisoned tomatoes into the enemy castle’s well. Now they have all the ingredients for a BLT of death.</normal_attack>
+        <normal_attack is_critical="true">You gather all of the putrid rotting tomatoes you can find and hurl them at the enemy who, unable to stand the stench, jump into their moat. Easy pickings.</normal_attack>
+        <normal_attack is_critical="true">You mix together three drops of ale, a handful of dried chilli peppers and a viking booger. Shaking the vial up, you lob it across the enemy lines. Alchemy!</normal_attack>
+        <normal_attack is_critical="true">You slash with blazing speed with your urumi given to you by the warriors out east.</normal_attack>
+        <normal_attack is_critical="true">You spot some smoke in the distance and go out to explore. You are rewarded for your diligence, finding a lone, yet formidable warrior who agrees to join you on his way to Bebbanburg.</normal_attack>
+        <normal_attack is_critical="true">You stumble across a sign on a road leading from your opponents' castle. To the left it says, "To the enemy castle!" To the right it says, "Beware, wild bears!" Obviously, you switch the signs.</normal_attack>
+        <normal_attack is_critical="true">You take charge, coordinating with the rest of your party to launch your attack at the same time. The devastation caused by the teamwork is significantly higher. That Knight was right about jolly cooperation.</normal_attack>
+        <normal_attack is_critical="true">Your warriors elect you to sneak into the enemy fort undetected come nightfall. Things quickly get out of hand as they mistake you as one of them. One thing leads to another, and before you know it you spend the night drinking mead. A lot of mead.</normal_attack>
+        <normal_attack>"He ran into my sword! He ran into my sword ten times!"</normal_attack>
+        <normal_attack>"No, I said to take him out! Not invite him over for a nice dinner."</normal_attack>
+        <normal_attack>A trader from frankia offers you his crossbow for some trinket you found on your travels. You're now the most technologically advanced warrior in your region.</normal_attack>
+        <normal_attack>A yell and a gurgle eminates from the distance. Either someone has broken into the ale stores, or your leaf trap was successful.</normal_attack>
+        <normal_attack>Academia didn't turn out to be your thing, so you left to become a warrior. To your surprise, all of those long nights of studying battle strategy payed off. Thanks Mom.</normal_attack>
+        <normal_attack>After dark, you coat your weapons with oils you made from berries in the woods. Even the tiniest cut will inflict much greater damage.</normal_attack>
+        <normal_attack>As the axe comes down you raise your shield at the last second, parrying the mighty blow. The enemy grumbles in annoyance and swings again, but this time.. this time you're ready.</normal_attack>
+        <normal_attack>As the fog lifts, it unveils a gap in the enemies flanks. You take full advantage and charge in for the attack.</normal_attack>
+        <normal_attack>Deep breath in, steady breath out. You aim for the lookout in the enemy tower. You hold your breath and release the string. This is your favorite hobby, and the guards hate you for it.</normal_attack>
+        <normal_attack>Good old fashioned bow, good old fashioned arrow. You know what happens next.</normal_attack>
+        <normal_attack>Hiding in the upper branches of a tree, a band of enemy warriors pass beneath you. Taking out your slingshot, your shot lands right between the eyes of the big one with the battleaxe. Thinking they're under attack, the rest flee.</normal_attack>
+        <normal_attack>Inhaling the brisk air, you take a take a second to listen to the sounds around you, looking out for every small movement. A twig snaps and you let loose your bow on the forest line, your arrow finding its target. You carve off another notch on your bow to brag to your friends.</normal_attack>
+        <normal_attack>It's a clear day, and the weather is perfect for picking off enemy scouts. What more could an archer want?</normal_attack>
+        <normal_attack>Kicking leaves around your encampment you stumble across a rock. This quickly becomes your favorite weapon. No one understands why.</normal_attack>
+        <normal_attack>Meditating isn't just for monks. Your increased focus allows you to propel your axe through your enemies at a greater speed!</normal_attack>
+        <normal_attack>Scaling the walls of the enemy castle, you're able to identify a weak point and stab your sword through. You hit something soft and fleshy. Success!</normal_attack>
+        <normal_attack>Sword in hand, you glide through the battlefield, dodging and jabbing as your opponents fall around you.</normal_attack>
+        <normal_attack>The enemy tribe watching you approach cries with laughter at the size of your dagger. Right up until the moment they realize you have them surrounded.</normal_attack>
+        <normal_attack>The gate of the enemy castle opens to let reinforcements inside. You take the chance to get a few arrows in before it's quickly closed.</normal_attack>
+        <normal_attack>The last thing the enemy warrior heard was the whistling of your arrow piercing through the air.</normal_attack>
+        <normal_attack>The moats means you can't just sneak up and scale the castle walls, but that really doesn't matter if you manage to sneak in close enough for the fire arrows to reach them.</normal_attack>
+        <normal_attack>The shadows of the forest cloak you as you make your way to the enemy castle. Rewarded for your stealthiness, you ambush a marauding enemy group. Finishing just in time to make it back for dinner.</normal_attack>
+        <normal_attack>The tall grass seemed like the perfect hiding spot, so you didn't expect a group of warriors to walk that close. After a few heart-stopping moments, they leave you unnoticed and you can take them out one by one with a few quick arrows.</normal_attack>
+        <normal_attack>There are a number of broken arrows on the battlefield. You collect them and launch them towards the enemy castle. The whistling sound they make while flying is quite satisfying.</normal_attack>
+        <normal_attack>Through the mist you see your target and quietly release your bow with a satisfied smirk. Enemy neutralized.</normal_attack>
+        <normal_attack>Unfortunately, you accidentally knock over your box of poison dipped darts from the tree branch you're hiding on. Fortunately, at that exact moment an enemy regiment happened to be passing below.</normal_attack>
+        <normal_attack>With bated breath you hide in the forest's trees, waiting to attack the castle, when an enemy troop comes by. You attack the commanding officer and deal a mighty blow! They decide to take a short nap.</normal_attack>
+        <normal_attack>With the warm sunlight beating down, you always your mind to drift slightly. You return sharply to reality when you hear the wooshing sound of an arrow narrowly missing your head. You quickly focus on the direction the arrow came from and return the favour. You just happen to be slightly more accurate than them.</normal_attack>
+        <normal_attack>You are the warrior bard. Although they may have laughed at your career choice, you prove deadly on the battlefield; rallying the morale of warriors and strengthening resolve as you charge into battle.</normal_attack>
+        <normal_attack>You can feel the hair on the back of your neck rise, you turn around just in time to see the enemy approach with a small dagger. A quick roll to the side and their element of surprise is lost.</normal_attack>
+        <normal_attack>You deftly let loose an arrow. With a soft whistle it hits its target and falls to the ground, taking an enemy warrior with it. Bullseye.</normal_attack>
+        <normal_attack>You find a band of drunkards and convince them the enemy is stealing their ale! You're surprised how well that worked.</normal_attack>
+        <normal_attack>You find a bard in the middle of the woods. Unsure what he's doing there, you approach cautiously. He knows many songs of glorious battles. You learn a thing or two.</normal_attack>
+        <normal_attack>You find some wild berries in the forest. Under the cover of night, you manage to poison the enemy's water supply. They realise too late and take a heavy blow to their numbers.</normal_attack>
+        <normal_attack>You gain the loyalty of a wolf by saving its life when it was badly wounded. When finally healed, she saves your life from a mercenary hired to kill you. You find you're now a dog person.</normal_attack>
+        <normal_attack>You get up, stretch your limbs and mutter to yourself: "Alright, let's do this!"</normal_attack>
+        <normal_attack>You helped a Viking end a blood fued. With no further issues to resolve, he joins your ranks in search of glory.</normal_attack>
+        <normal_attack>You hold your breath until the enemy warrior walks by the tree you are hiding behind. One quick smooth blow knocks him out. You decide not to kill him because he seems like an overall nice guy.</normal_attack>
+        <normal_attack>You learn the art of spear fishing. You use your new spear for battles and delicious meals alike.</normal_attack>
+        <normal_attack>You learn the art of spear fishing. You use your new spear for battles and delicious meals alike.</normal_attack>
+        <normal_attack>You lower the drawbridge a bit faster than you intended. Good thing those were enemy warriors.</normal_attack>
+        <normal_attack>You pick up a flail, uncertain of what to do as your enemy approaches. Suddenly, your friend shouts your name and you swing round to respond. You hear a thud behind you and turn back to see your opponent lying there on the ground. That definitely counts.</normal_attack>
+        <normal_attack>You protect a group of monks from a raiding band of vikings. They teach you the local language, allowing you to trade with their people.</normal_attack>
+        <normal_attack>You pull a blanket of leaves over the hole you just finished digging. Before too long, a group of scary looking warriors fall in. The first one, you expected. But the sixth one?</normal_attack>
+        <normal_attack>You remember a story you once read that gives you an idea. You and another soldier flank the enemy from both sides and launch an attack simultaneously! It was very effective.</normal_attack>
+        <normal_attack>You see a faint glimmer eminating from the castle wall. It fades for a second, but flickers again. It's the sunlight reflecting off the armour of an enemy warrior. You aim, and release the string of your bow with a satisfying thud. Nice.</normal_attack>
+        <normal_attack>You spend time with a wealthy merchant who teaches you the art of medieval politics and economics. You find that the pen is mightier than the sword.</normal_attack>
+        <normal_attack>You take charge, coordinating with the rest of your party to launch your attack at the same time. The devastation caused by the teamwork is significantly higher. Solaire was right!</normal_attack>
+    </team>
+</actions>

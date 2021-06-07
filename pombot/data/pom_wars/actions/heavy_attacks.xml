@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <team name="Knight">
+        <heavy_attack is_critical="true">Is that a... Valkyrie? You suddenly feel the strength of the norse gods coarsing through your veins. You pick up a hammer and throw. Jury's out whether it'll come back to you or not.</heavy_attack>
+        <heavy_attack is_critical="true">Some warriors are messing around on patrol when they discover a mighty sword. They reveal it to their leader and make a charge.</heavy_attack>
+        <heavy_attack is_critical="true">While hunting in the nearby wilderness, you saved a man named Athelstan from bandits. You're informed someone named Ragnar has suddenly become your ally.</heavy_attack>
+        <heavy_attack is_critical="true">You bend down to touch the strange glowing markings on the floor, watching in astonishment as a knight in onion armour appears, offering you his sword. As strange as he looks, you find him to be quite a formidable warrior.</heavy_attack>
+        <heavy_attack is_critical="true">You have dinner with the enemy chieftan, discussing a truce. After you realize that he has done the inconceivable by attempting to poison your wine, you switch cups when he isn't looking.</heavy_attack>
+        <heavy_attack>A few sages create circle and begin chanting. Suddenly, a boulder crashes down on a group of enemy soldiers. The two events may or may not be related.</heavy_attack>
+        <heavy_attack>A gigantic looking warrior emerges from the crowd and hurls her axe with almighty force at the enemy archers. You're glad she's on your side.</heavy_attack>
+        <heavy_attack>A guard leans over the precipice of the castle, looking at the shimmering water. As he looks more closely, he realises it's not water, but a shimmering sea of helmets. The guard calls the alarm but your army has already breached the gate; successfully sacking in the fort. High fives were exchanged all around.</heavy_attack>
+        <heavy_attack>After years of felling trees, felling enemies is easy. You're thankful that your job title as warrrior allows you to conveniently get your workout in at the same time.</heavy_attack>
+        <heavy_attack>All that extra training finally paid off! Your sword swings much more efficiently and you unleash almost double the amount of damage you would have done just a few months ago. You're proud.</heavy_attack>
+        <heavy_attack>As you give the command, fire tipped arrows light up the night sky like shooting stars as they rain down upon the enemy. You take a moment, astonished at the majestic scenery unfolding before you. Beautiful. :,)</heavy_attack>
+        <heavy_attack>Call it cliche, but heavy falling objects work in 99.99% of cases.</heavy_attack>
+        <heavy_attack>In desperation, you throw your axe at the enemy gate ahead of you. Somehow, the structure gives and the gate crashes down on the enemy forces. But could you do that a second time?</heavy_attack>
+        <heavy_attack>Just before heading into battle, you spot an opening in the enemy's defenses. You adjust your catapult and aim right at the weak point. The advantage is yours and you make full use of it.</heavy_attack>
+        <heavy_attack>Someone lets you borrow their huge war bear. You find that Bödvar is a good boy, and you don't want to give him back.</heavy_attack>
+        <heavy_attack>The catapault launches a bombardment of projectiles, hurling rock after rock you weaken the structural integrity of their castle walls.</heavy_attack>
+        <heavy_attack>The enemy warriors are no match for your champion. You remark on how proud you are, as he clears a path for your army leaving a wake of destruction and mayhem.</heavy_attack>
+        <heavy_attack>The roar of horns echo in the distance. The sound of bellowing and chanting emenating from your fellow warriors. Your morale is heightened as you stand ready to charge the enemy army approaching. In this moment don't care for whether you're a knight or a viking. You charge. FOR VALHALLA!</heavy_attack>
+        <heavy_attack>Those pushup challenges back at the castle are proving useful you remark as you blaze a trail of chaos throughout the enemy line.</heavy_attack>
+        <heavy_attack>Upon hearing you approach dragging your big heavy axe, your enemies flee running straight into an ambush! They are swiftly defeated. You love when a good plan works out.</heavy_attack>
+        <heavy_attack>While enjoying your cup of ale, you suddenly find yourself challenged to a wrestling match by the colossal brute across the hall. He's surprised when he finds he is beaten, and impressed by your strength, he swears his sword to you. — Becoming your most loyal warrior.</heavy_attack>
+        <heavy_attack>With a roaring battle cry, you swing your great battle axe at the approaching enemy warrior. He is no match for your might, and is flung several feet into the air. People were talking about it for days.</heavy_attack>
+        <heavy_attack>You acquire an impressive looking viking longboat, giving you and your warriors a significant battle advantage by sea. You like the way it looks too.</heavy_attack>
+        <heavy_attack>You and your fellow warriors thought it would be funny to launch a javelin from a massive slingshot. You didn't expect that to work so well! Too bad it was your only one though. Darn.</heavy_attack>
+        <heavy_attack>You collect the lay of the land and starts building a formidable siege catapult near the enemy castle. Perfect for a sneak attack during the night when there aren't those guards patrolling the perimeter.</heavy_attack>
+        <heavy_attack>Your band of warriors manages to successfully push over the enemy catapult at just the right angle. It topples onto the next one, which topples the next one, which topples the next one..</heavy_attack>
+    </team>
+    <team name="Viking">
+        <heavy_attack is_critical="true">Is that a... Valkyrie? You suddenly feel the strength of the norse gods coarsing through your veins. You pick up a hammer and throw. Jury's out whether it'll come back to you or not.</heavy_attack>
+        <heavy_attack is_critical="true">Some warriors are messing around on patrol when they discover a mighty sword. They reveal it to their leader and make a charge.</heavy_attack>
+        <heavy_attack is_critical="true">While hunting in the nearby wilderness, you saved a man named Athelstan from bandits. You're informed someone named Ragnar has suddenly become your ally.</heavy_attack>
+        <heavy_attack is_critical="true">You bend down to touch the strange glowing markings on the floor, watching in astonishment as a knight in onion armour appears, offering you his sword. As strange as he looks, you find him to be quite a formidable warrior.</heavy_attack>
+        <heavy_attack is_critical="true">You have dinner with the enemy chieftan, discussing a truce. After you realize that he has done the inconceivable by attempting to poison your wine, you switch cups when he isn't looking.</heavy_attack>
+        <heavy_attack>A few sages create circle and begin chanting. Suddenly, a boulder crashes down on a group of enemy soldiers. The two events may or may not be related.</heavy_attack>
+        <heavy_attack>A gigantic looking warrior emerges from the crowd and hurls her axe with almighty force at the enemy archers. You're glad she's on your side.</heavy_attack>
+        <heavy_attack>A guard leans over the precipice of the castle, looking at the shimmering water. As he looks more closely, he realises it's not water, but a shimmering sea of helmets. The guard calls the alarm but your army has already breached the gate; successfully sacking in the fort. High fives were exchanged all around.</heavy_attack>
+        <heavy_attack>After years of felling trees, felling enemies is easy. You're thankful that your job title as warrrior allows you to conveniently get your workout in at the same time.</heavy_attack>
+        <heavy_attack>All that extra training finally paid off! Your sword swings much more efficiently and you unleash almost double the amount of damage you would have done just a few months ago. You're proud.</heavy_attack>
+        <heavy_attack>As you give the command, fire tipped arrows light up the night sky like shooting stars as they rain down upon the enemy. You take a moment, astonished at the majestic scenery unfolding before you. Beautiful. :,)</heavy_attack>
+        <heavy_attack>Call it cliche, but heavy falling objects work in 99.99% of cases.</heavy_attack>
+        <heavy_attack>In desperation, you throw your axe at the enemy gate ahead of you. Somehow, the structure gives and the gate crashes down on the enemy forces. But could you do that a second time?</heavy_attack>
+        <heavy_attack>Just before heading into battle, you spot an opening in the enemy's defenses. You adjust your catapult and aim right at the weak point. The advantage is yours and you make full use of it.</heavy_attack>
+        <heavy_attack>Someone lets you borrow their huge war bear. You find that Bödvar is a good boy, and you don't want to give him back.</heavy_attack>
+        <heavy_attack>The catapault launches a bombardment of projectiles, hurling rock after rock you weaken the structural integrity of their castle walls.</heavy_attack>
+        <heavy_attack>The enemy warriors are no match for your champion. You remark on how proud you are, as he clears a path for your army leaving a wake of destruction and mayhem.</heavy_attack>
+        <heavy_attack>The roar of horns echo in the distance. The sound of bellowing and chanting emenating from your fellow warriors. Your morale is heightened as you stand ready to charge the enemy army approaching. In this moment don't care for whether you're a knight or a viking. You charge. FOR VALHALLA!</heavy_attack>
+        <heavy_attack>Those pushup challenges back at the castle are proving useful you remark as you blaze a trail of chaos throughout the enemy line.</heavy_attack>
+        <heavy_attack>Upon hearing you approach dragging your big heavy axe, your enemies flee running straight into an ambush! They are swiftly defeated. You love when a good plan works out.</heavy_attack>
+        <heavy_attack>While enjoying your cup of ale, you suddenly find yourself challenged to a wrestling match by the colossal brute across the hall. He's surprised when he finds he is beaten, and impressed by your strength, he swears his sword to you. — Becoming your most loyal warrior.</heavy_attack>
+        <heavy_attack>With a roaring battle cry, you swing your great battle axe at the approaching enemy warrior. He is no match for your might, and is flung several feet into the air. People were talking about it for days.</heavy_attack>
+        <heavy_attack>You acquire an impressive looking viking longboat, giving you and your warriors a significant battle advantage by sea. You like the way it looks too.</heavy_attack>
+        <heavy_attack>You and your fellow warriors thought it would be funny to launch a javelin from a massive slingshot. You didn't expect that to work so well! Too bad it was your only one though. Darn.</heavy_attack>
+        <heavy_attack>You collect the lay of the land and starts building a formidable siege catapult near the enemy castle. Perfect for a sneak attack during the night when there aren't those guards patrolling the perimeter.</heavy_attack>
+        <heavy_attack>Your band of warriors manages to successfully push over the enemy catapult at just the right angle. It topples onto the next one, which topples the next one, which topples the next one..</heavy_attack>
+    </team>
+</actions>

@@ -70,7 +70,7 @@ disable=locally-disabled,
         suppressed-message,
         missing-module-docstring,
         f-string-without-interpolation,
-        unsubscriptable-object,
+        duplicate-code,  # This is a nice idea, but is currently broken.
 
 
 [REPORTS]

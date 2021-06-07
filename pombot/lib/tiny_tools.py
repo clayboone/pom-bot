@@ -156,3 +156,11 @@ class PolyStr(str):
                                  self[last_comma_index + len(old):])))
 
         return self
+
+
+def flatten(list_of_lists: list) -> list:
+    """Convert a list of lists into a simple list.
+
+    This has the effect of removing empty lists as well.
+    """
+    return [item for sublist in list_of_lists for item in sublist]

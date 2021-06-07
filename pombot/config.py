@@ -4,8 +4,7 @@ from datetime import timedelta
 
 import dotenv
 
-from pombot.lib.tiny_tools import (classproperty, explode_after_char,
-                                   positive_int, str2bool)
+from pombot.lib.tiny_tools import classproperty, explode_after_char, str2bool
 
 dotenv.load_dotenv(override=True)
 
@@ -102,20 +101,24 @@ class IconUrls:
 
 class Pomwars:
     """Configuration for Pom Wars."""
-    LOAD_POM_WARS = str2bool(os.getenv("LOAD_POM_WARS", "no"))
-    KNIGHT_ROLE = os.getenv("KNIGHT_ROLE")
-    VIKING_ROLE = os.getenv("VIKING_ROLE")
-    BASE_DAMAGE_FOR_NORMAL_ATTACKS = positive_int(os.getenv("BASE_DAMAGE_FOR_NORMAL_ATTACKS"))
-    BASE_DAMAGE_FOR_HEAVY_ATTACKS = positive_int(os.getenv("BASE_DAMAGE_FOR_HEAVY_ATTACKS"))
+    KNIGHT_ROLE = "Knight"
+    VIKING_ROLE = "Viking"
+
+    BASE_DAMAGE_FOR_NORMAL_ATTACKS = 10
+    BASE_DAMAGE_FOR_HEAVY_ATTACKS = 40
     BASE_CHANCE_FOR_CRITICAL = 0.20
-    SUCCESSFUL_ATTACK_EMOTE = os.getenv("SUCCESSFUL_ATTACK_EMOTE")
-    SUCCESSFUL_DEFEND_EMOTE = os.getenv("SUCCESSFUL_DEFEND_EMOTE")
+    DAMAGE_MULTIPLIER_FOR_CRITICAL = 1.35
+
     ACTION_COLOUR = 0xF5F5DC
-    HEAVY_COLOUR = 0xFFD700
-    NORMAL_COLOUR = 0xec5c5b # Normal attack
+    HEAVY_ATTACK_COLOUR = 0xFFD700
+    NORMAL_ATTACK_COLOUR = 0xec5c5b
     DEFEND_COLOUR = 0x55aedd
 
+    LOAD_POM_WARS = str2bool(os.getenv("LOAD_POM_WARS", "no"))
+    SUCCESSFUL_ATTACK_EMOTE = os.getenv("SUCCESSFUL_ATTACK_EMOTE")
+    SUCCESSFUL_DEFEND_EMOTE = os.getenv("SUCCESSFUL_DEFEND_EMOTE")
     JOIN_CHANNEL_NAME = os.getenv("JOIN_CHANNEL_NAME").lstrip("#")
+
     KNIGHT_ONLY_GUILDS = [
         int(guild.strip()) if guild.strip() else 0
         for guild in os.getenv("KNIGHT_ONLY_GUILDS").split(",")
@@ -136,7 +139,7 @@ class Pomwars:
     HEAVY_PITY_INCREMENT = 0.10
     HEAVY_QUALIFIERS = ["heavy", "hard", "sharp", "strong"]
 
-    DEFEND_LEVEL_MULTIPLIERS = {1: 0.05, 2: 0.08, 3: 0.07, 4: 0.08, 5: 0.09}
+    DEFEND_LEVEL_MULTIPLIERS = {1: 0.05, 2: 0.06, 3: 0.07, 4: 0.08, 5: 0.09}
     DEFEND_DURATION_MINUTES = 30
     MAXIMUM_TEAM_DEFENCE = 0.25
 

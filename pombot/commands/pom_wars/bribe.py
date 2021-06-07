@@ -1,22 +1,16 @@
-import random
 from datetime import datetime
 
 from discord.ext.commands import Context
 
-from pombot.data import Locations
-from pombot.data.pom_wars import load_actions_directories
+from pombot.data.pom_wars.actions import Bribes
 from pombot.lib.pom_wars.team import get_user_team
-from pombot.lib.pom_wars.types import Bribe
 from pombot.lib.storage import Storage
 from pombot.lib.types import ActionType
 
 
 async def do_bribe(ctx: Context):
     """What? I don't take bribes..."""
-    bribes = load_actions_directories(Locations.BRIBES_DIR, type_=Bribe)
-    weights = [bribe.weight for bribe in bribes]
-    bribe, = random.choices(bribes, weights=weights)
-
+    bribe = Bribes.get_random()
     timestamp = datetime.now()
 
     action = {

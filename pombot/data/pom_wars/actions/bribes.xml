@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <bribe>Attempted to bribe on full stomach.</bribe>
+    <bribe>```User ${DISPLAY_NAME} (${NAME}#${DISCRIMINATOR}) offered ${BOTNAME} a cup of coffee and hit: Command raised exception: HTTP Error 418. I'm a teapot.```</bribe>
+    <bribe>```User ${DISPLAY_NAME} (${NAME}#${DISCRIMINATOR}) running "!bribe" hit: Command raised an exception: HTTP Error 451. Please try again later.```</bribe>
+</actions>

@@ -1,9 +1,10 @@
 # Prod
 aiomysql>=0.0.21
 discord.py>=1.7.1
+lxml>=4.6.3
 python-dotenv>=0.10.5
 
 # Dev
 parameterized>=0.8.1
-pylint>=2.7.2
+pylint>=2.8.3
 pytest>=6.1.2
