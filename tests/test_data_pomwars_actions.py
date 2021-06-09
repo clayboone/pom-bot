@@ -8,6 +8,7 @@ from typing import Tuple
 from lxml import etree
 from parameterized import parameterized
 
+from pombot.config import Pomwars
 from pombot.data import Locations
 from pombot.data.pom_wars import actions
 from pombot.lib.pom_wars.team import Team
@@ -51,25 +52,25 @@ class TestActionsData(unittest.TestCase):
 
     @parameterized.expand([
         ("normal_attack inside team",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <normal_attack>valid normal attack</normal_attack>
                 </team>
             </actions>
         """)),
         ("heavy_attack inside team",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <heavy_attack>valid heavy attack</heavy_attack>
                 </team>
             </actions>
         """)),
         ("is_critical is valid attack attribute",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <normal_attack is_critical="true">valid critical normal attack</normal_attack>
                     <normal_attack is_critical="false">valid normal attack</normal_attack>
                     <heavy_attack is_critical="true">valid critical heavy attack</heavy_attack>
@@ -78,10 +79,10 @@ class TestActionsData(unittest.TestCase):
             </actions>
         """)),
         ("defend inside team",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
-                    <defend>valid attack</defend>
+                <team name="{Pomwars.KNIGHT_ROLE}">
+                    <defend>valid defend</defend>
                 </team>
             </actions>
         """)),
@@ -119,25 +120,25 @@ class TestActionsData(unittest.TestCase):
             </actions>
         """)),
         ("<defend> attribute is_critical is not allowed",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Viking">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <defend is_critical="true">invalid defend</defend>
                 </team>
             </actions>
         """)),
         ("<bribe> must be inside an <actions> tag",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <bribe>invalid bribe</bribe>
                 </team>
             </actions>
         """)),
         ("team attribute is not allowed",
-         textwrap.dedent("""\
+         textwrap.dedent(f"""\
             <actions>
-                <bribe team="Knight">invalid bribe</bribe>
+                <bribe team="{Pomwars.KNIGHT_ROLE}">invalid bribe</bribe>
             </actions>
         """)),
     ])
@@ -166,14 +167,14 @@ class TestActionsData(unittest.TestCase):
 
         self.write_actions_xml(textwrap.dedent(f"""\
             <actions>
-                <team name="Knight">
+                <team name="{Pomwars.KNIGHT_ROLE}">
                     <normal_attack is_critical="true">{stories["kn_crit_norm"]}</normal_attack>
                     <heavy_attack is_critical="true">{stories["kn_crit_heav"]}</heavy_attack>
                     <normal_attack>{stories["kn_norm"]}</normal_attack>
                     <heavy_attack>{stories["kn_heav"]}</heavy_attack>
                     <defend>{stories["kn_def"]}</defend>
                 </team>
-                <team name="Viking">
+                <team name="{Pomwars.VIKING_ROLE}">
                     <normal_attack is_critical="true">{stories["vk_crit_norm"]}</normal_attack>
                     <heavy_attack is_critical="true">{stories["vk_crit_heav"]}</heavy_attack>
                     <normal_attack>{stories["vk_norm"]}</normal_attack>
