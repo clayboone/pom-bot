@@ -40,9 +40,11 @@ def daterange_from_timestamp(timestamp: datetime):
     return DateRange(morning, evening)
 
 
-def has_any_role(ctx: Context, roles_needed=None) -> bool:
+def has_any_role(ctx: Context, roles_needed=None):
     """A non-decorator reimplementation of discord.ext.commands.has_any_role,
     but with dignity.
+
+    @raises dicord.ext.commands.errors.CheckFailure.
     """
     roles_needed = roles_needed or []
 
@@ -56,8 +58,6 @@ def has_any_role(ctx: Context, roles_needed=None) -> bool:
             else get_user_roles(name=role_needed) is not None
                 for role_needed in roles_needed):
         raise MissingAnyRole(roles_needed)
-
-    return True
 
 
 class BotCommand(Command):
@@ -150,10 +150,9 @@ class PolyStr(str):
         return self.__class__(super().format(*args, **kwargs))
 
     def replace_final_occurence(self, old: str, new: str):
-        """Like `replace`, but only replace the last occurence of char."""
-        if (last_comma_index := self.rfind(old)) > 0:
-            return self.__class__(" ".join((self[:last_comma_index], new,
-                                 self[last_comma_index + len(old):])))
+        """Like `replace`, but only replace the last occurence of `old`."""
+        if (index := self.rfind(old)) > 0:
+            return self.__class__(" ".join((self[:index], new, self[index + len(old):])))
 
         return self
 

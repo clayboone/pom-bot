@@ -7,6 +7,7 @@ from pombot.config import Config, Reactions
 from pombot.lib.messages import EmbedField, send_embed_message
 from pombot.lib.tiny_tools import PolyStr, normalize_newlines
 
+OFFSET = " " * 2
 
 def _uniq(iterator: Iterator) -> Any:
     already_yielded = set()
@@ -46,11 +47,10 @@ def _get_help_for_all_commands(ctx: Context) -> Tuple[Optional[str],
             groups[command.extension] = {command.name: command.short_doc}
 
     response_lines = []
-    offset = " " * 2
 
     for group in sorted(groups):
         response_lines.append(f"\n{group} commands:".title().replace("_", " "))
-        response_lines.extend(f"{offset}{cmd}: {groups[group][cmd]}"
+        response_lines.extend(f"{OFFSET}{cmd}: {groups[group][cmd]}"
                               for cmd in sorted(groups[group]))
 
     response = "```{}```".format("\n".join(response_lines))

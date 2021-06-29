@@ -210,7 +210,7 @@ class Storage:
         rows affected.
         """
         query = f"""
-            UPDATE  {Config.POMS_TABLE}
+            UPDATE {Config.POMS_TABLE}
             SET current_session = 0
             WHERE userID = %s
             AND current_session = 1;

@@ -47,8 +47,8 @@ async def do_attack(ctx: Context, *args):
     action = {
         "user":           ctx.author,
         "team":           get_user_team(ctx.author).value,
-        "action_type":    ActionType.HEAVY_ATTACK if heavy_attack
-                            else ActionType.NORMAL_ATTACK,
+        "action_type":    ActionType.HEAVY_ATTACK
+                              if heavy_attack else ActionType.NORMAL_ATTACK,
         "was_successful": False,
         "was_critical":   False,
         "items_dropped":  "",
