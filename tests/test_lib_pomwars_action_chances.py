@@ -25,7 +25,7 @@ class TestActionSuccessRates(unittest.IsolatedAsyncioTestCase):
         random_mock: Mock,
         get_actions_mock: Mock,
     ):
-        """Generically test _is_attack_successful when doing a normal attack."""
+        """Generically test is_action_successful when doing a normal attack."""
         dice_rolls_and_expected_outcomes = {
             1: [(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0),
                 (TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU)],
@@ -79,7 +79,7 @@ class TestActionSuccessRates(unittest.IsolatedAsyncioTestCase):
         get_user_by_id_mock: Mock,
         get_actions_mock: Mock,
     ):
-        """Generically test _is_attack_successful when doing a heavy attack."""
+        """Generically test is_action_successful when doing a heavy attack."""
         class MockPom(MagicMock):
             """A fake Pom object.
 
@@ -87,8 +87,8 @@ class TestActionSuccessRates(unittest.IsolatedAsyncioTestCase):
             attack is consulted. For each previous unsuccesful attack, there
             is a configurable increase in the chance for the next attack.
 
-            For this test, we expect the futures chances to remain constant,
-            so each previous attack must be successful.
+            For this test, we expect the future chances to remain constant, so
+            each previous attack must be successful.
             """
             @staticmethod
             def was_successful():
@@ -107,18 +107,30 @@ class TestActionSuccessRates(unittest.IsolatedAsyncioTestCase):
         )
 
         dice_rolls_and_expected_outcomes = {
-            MockPom(1): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(2): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(3): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(4): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(5): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(6): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(7): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(8): [(0.1, 0.2, 0.3), (TRU, TRU, FLS)],
-            MockPom(9): [(0.1, 0.2, 0.3), (TRU, FLS, FLS)],
-            MockPom(10): [(0.1, 0.2, 0.3), (TRU, FLS, FLS)],
-            MockPom(11): [(0.1, 0.2, 0.3), (FLS, FLS, FLS)],
-            MockPom(12): [(0.1, 0.2, 0.3), (FLS, FLS, FLS)],
+            MockPom(1):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(2):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(3):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(4):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(5):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(6):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(7):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(8):  [(0.1, 0.2, 0.3),
+                          (TRU, TRU, FLS)],
+            MockPom(9):  [(0.1, 0.2, 0.3),
+                          (TRU, FLS, FLS)],
+            MockPom(10): [(0.1, 0.2, 0.3),
+                          (TRU, FLS, FLS)],
+            MockPom(11): [(0.1, 0.2, 0.3),
+                          (FLS, FLS, FLS)],
+            MockPom(12): [(0.1, 0.2, 0.3),
+                          (FLS, FLS, FLS)],
         }
         user = MagicMock()
         is_heavy_attack = True
@@ -146,7 +158,7 @@ class TestActionSuccessRates(unittest.IsolatedAsyncioTestCase):
         random_mock: Mock,
         get_actions_mock: Mock,
     ):
-        """Generically test _is_attack_successful when doing a defend."""
+        """Generically test is_action_successful when doing a defend."""
         dice_rolls_and_expected_outcomes = {
             1: [(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0),
                 (TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU, TRU)],
