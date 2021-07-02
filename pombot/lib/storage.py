@@ -7,11 +7,11 @@ from typing import Iterable, List, Optional, Set, Union
 
 import aiomysql
 from discord.user import User as DiscordUser
-
-import pombot.lib.errors as errors
 import pombot.lib.pom_wars.errors as war_crimes
 from pombot.config import Config, Secrets
-from pombot.lib.types import Action, ActionType, DateRange, Event, Pom, SessionType
+from pombot.lib import errors
+from pombot.lib.types import (Action, ActionType, DateRange, Event, Pom,
+                              SessionType)
 from pombot.lib.types import User as PombotUser
 from pombot.state import State
 
