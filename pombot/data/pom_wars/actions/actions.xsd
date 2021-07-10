@@ -4,17 +4,31 @@
 <xs:complexType name="attackType">
     <xs:simpleContent>
         <xs:extension base="xs:string">
-            <xs:attribute name="is_critical" type="xs:boolean" default="false"/>
+            <xs:attribute name="critical" type="xs:boolean" default="false"/>
         </xs:extension>
     </xs:simpleContent>
 </xs:complexType>
 
-<xs:complexType name="teamType">
+<xs:complexType name="tierType">
     <xs:choice maxOccurs="unbounded">
         <xs:element name="defend" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="heavy_attack" type="attackType" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="normal_attack" type="attackType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:choice>
+    <xs:attribute name="level" use="required">
+        <xs:simpleType>
+            <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="3"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+</xs:complexType>
+
+<xs:complexType name="teamType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tier" type="tierType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
     <xs:attribute name="name" use="required">
         <xs:simpleType>
             <xs:restriction base="xs:string">

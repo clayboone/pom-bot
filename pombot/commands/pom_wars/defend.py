@@ -45,7 +45,10 @@ async def do_defend(ctx: Context, *args):
     action["was_successful"] = True
     await ctx.message.add_reaction(Reactions.SHIELD)
 
-    defend = Defends.get_random(team=action["team"])
+    defend = Defends.get_random(
+        team=action["team"],
+        average_daily_actions=1,  #FIXME add to DB methods
+    )
 
     await Storage.add_pom_war_action(**action)
 

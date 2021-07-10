@@ -68,6 +68,7 @@ async def do_attack(ctx: Context, *args):
 
     attack = Attacks.get_random(
         team=action["team"],
+        average_daily_actions=1,  #FIXME add to DB methods
         critical=action["was_critical"],
         heavy=heavy_attack,
     )

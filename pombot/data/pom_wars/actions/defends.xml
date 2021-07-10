@@ -1,55 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
     <team name="Knight">
-        <defend>"My presence here is not a problem," you say. "Your presence here is not a problem," the enemy warrior repeats. "You will let me go on my way," you say. "I will let you go on your way," the enemy warrior repeats.</defend>
-        <defend>A bard comes to your camp in the forest as she offers to sing you a song. Your spirits are lifted and you stay more alert during the night watch.</defend>
-        <defend>A man asks to be let into your castle, and he turns out to be a quite proficient metal-smith. Your armor has much greater mobility, making it easier to defend yourself.</defend>
-        <defend>A roadside merchant offers to repair your gear for a few coins. He even adds some improvements to your armour!</defend>
-        <defend>An old lady in the forest offers you some soup. You feel refreshed and are better able to hold up your shield in battle.</defend>
-        <defend>Batting down the hatches you take the chance to reinforce your castles walls. No one will be getting in now!</defend>
-        <defend>Quick thinking has always been your strongest suit. You roll out of the way of an incoming arrow and retreat into the forest to regroup.</defend>
-        <defend>Taking advantage of the sunshine you go and collect wood from the forest to begin barricading your castle gate.</defend>
-        <defend>Walking on a path in the forest, you encounter an old lady. She asks for help with her frying pan. You clean it for her and she tells you about a great spot to set up camp away from enemy patrol.</defend>
-        <defend>You always keep at your side a weatherman. When it rains, you strike devestating blows to your armored enemies as they awkwardly struggle against the muddy terrain.</defend>
-        <defend>You and a small group of fellow warriors take advantage of the local resources; chopping down lumber to reinforce defenses. Cheap and efficient!</defend>
-        <defend>You and a squad of warriors use your shields to form an iron phalanx, becoming an impenetrable wall of metal. It's very effective.</defend>
-        <defend>You crouch under an unusually large shield, completely covering your body. You breathe a sigh of relief as the pinging of metal indicates you successfully blocked the incoming arrows.</defend>
-        <defend>You decide to rally your warriors to a better strategic position. You are now awaiting the enemy's next attack, relieved that you have secured the high ground.</defend>
-        <defend>You expand your defenses. Archer towers are very overrated, they say. They'll come around.</defend>
-        <defend>You find a few trees in the forest that have been struck by lightning and spot an opportunity. Chopping them down, you barricade the main road to your castle, making it harder for the enemy to bring heavy equipment.</defend>
-        <defend>You learn the art of medicine from travelers out west. Your warriors now die less often, thanks to being fortified against disease and infection.</defend>
-        <defend>You meet a lone rider in the forest and he tells you about approaching warriors. You get back to the castle just in time to fortify your defenses.</defend>
-        <defend>You recruit a medieval defense specialist from the local area. She was worth every coin.</defend>
-        <defend>You remembered to lock the front gate. This will surely slow the enemy down this time.</defend>
-        <defend>You send out a spy to join the ranks of the enemy team. The scout successfully informs you of incoming attacks before they happen. Everyone likes that guy.</defend>
-        <defend>You take clay and mud from a nearby swamp and use it to protect against those predictable fire arrows they've been using for 3 days now.</defend>
-        <defend>You took some time to re-fasten the straps on your shield. You are slightly more efficient with it now.</defend>
-        <defend>Your skills in masonry come in handy as you repair the city walls with bricks you craft out of clay, fortifying your defenses.</defend>
+        <tier level="1">
+            <defend>"My presence here is not a problem," you say. "Your presence here is not a problem," the enemy warrior repeats. "You will let me go on my way," you say. "I will let you go on your way," the enemy warrior repeats.</defend>
+            <defend>A bard comes to your camp in the forest as she offers to sing you a song. Your spirits are lifted and you stay more alert during the night watch.</defend>
+            <defend>A man asks to be let into your castle, and he turns out to be a quite proficient metal-smith. Your armor has much greater mobility, making it easier to defend yourself.</defend>
+            <defend>A roadside merchant offers to repair your gear for a few coins. He even adds some improvements to your armour!</defend>
+            <defend>An old lady in the forest offers you some soup. You feel refreshed and are better able to hold up your shield in battle.</defend>
+            <defend>Batting down the hatches you take the chance to reinforce your castles walls. No one will be getting in now!</defend>
+            <defend>Quick thinking has always been your strongest suit. You roll out of the way of an incoming arrow and retreat into the forest to regroup.</defend>
+            <defend>Taking advantage of the sunshine you go and collect wood from the forest to begin barricading your castle gate.</defend>
+        </tier>
+        <tier level="2">
+            <defend>Walking on a path in the forest, you encounter an old lady. She asks for help with her frying pan. You clean it for her and she tells you about a great spot to set up camp away from enemy patrol.</defend>
+            <defend>You always keep at your side a weatherman. When it rains, you strike devestating blows to your armored enemies as they awkwardly struggle against the muddy terrain.</defend>
+            <defend>You and a small group of fellow warriors take advantage of the local resources; chopping down lumber to reinforce defenses. Cheap and efficient!</defend>
+            <defend>You and a squad of warriors use your shields to form an iron phalanx, becoming an impenetrable wall of metal. It's very effective.</defend>
+            <defend>You crouch under an unusually large shield, completely covering your body. You breathe a sigh of relief as the pinging of metal indicates you successfully blocked the incoming arrows.</defend>
+            <defend>You decide to rally your warriors to a better strategic position. You are now awaiting the enemy's next attack, relieved that you have secured the high ground.</defend>
+            <defend>You expand your defenses. Archer towers are very overrated, they say. They'll come around.</defend>
+            <defend>You find a few trees in the forest that have been struck by lightning and spot an opportunity. Chopping them down, you barricade the main road to your castle, making it harder for the enemy to bring heavy equipment.</defend>
+        </tier>
+        <tier level="3">
+            <defend>You learn the art of medicine from travelers out west. Your warriors now die less often, thanks to being fortified against disease and infection.</defend>
+            <defend>You meet a lone rider in the forest and he tells you about approaching warriors. You get back to the castle just in time to fortify your defenses.</defend>
+            <defend>You recruit a medieval defense specialist from the local area. She was worth every coin.</defend>
+            <defend>You remembered to lock the front gate. This will surely slow the enemy down this time.</defend>
+            <defend>You send out a spy to join the ranks of the enemy team. The scout successfully informs you of incoming attacks before they happen. Everyone likes that guy.</defend>
+            <defend>You take clay and mud from a nearby swamp and use it to protect against those predictable fire arrows they've been using for 3 days now.</defend>
+            <defend>You took some time to re-fasten the straps on your shield. You are slightly more efficient with it now.</defend>
+            <defend>Your skills in masonry come in handy as you repair the city walls with bricks you craft out of clay, fortifying your defenses.</defend>
+        </tier>
     </team>
     <team name="Viking">
-        <defend>"My presence here is not a problem," you say. "Your presence here is not a problem," the enemy warrior repeats. "You will let me go on my way," you say. "I will let you go on your way," the enemy warrior repeats.</defend>
-        <defend>A bard comes to your camp in the forest as she offers to sing you a song. Your spirits are lifted and you stay more alert during the night watch.</defend>
-        <defend>A man asks to be let into your castle, and he turns out to be a quite proficient metal-smith. Your armor has much greater mobility, making it easier to defend yourself.</defend>
-        <defend>A roadside merchant offers to repair your gear for a few coins. He even adds some improvements to your armour!</defend>
-        <defend>An old lady in the forest offers you some soup. You feel refreshed and are better able to hold up your shield in battle.</defend>
-        <defend>Batting down the hatches you take the chance to reinforce your castles walls. No one will be getting in now!</defend>
-        <defend>Quick thinking has always been your strongest suit. You roll out of the way of an incoming arrow and retreat into the forest to regroup.</defend>
-        <defend>Taking advantage of the sunshine you go and collect wood from the forest to begin barricading your castle gate.</defend>
-        <defend>Walking on a path in the forest, you encounter an old lady. She asks for help with her frying pan. You clean it for her and she tells you about a great spot to set up camp away from enemy patrol.</defend>
-        <defend>You always keep at your side a weatherman. When it rains, you strike devestating blows to your armored enemies as they awkwardly struggle against the muddy terrain.</defend>
-        <defend>You and a small group of fellow warriors take advantage of the local resources; chopping down lumber to reinforce defenses. Cheap and efficient!</defend>
-        <defend>You and a squad of warriors use your shields to form an iron phalanx, becoming an impenetrable wall of metal. It's very effective.</defend>
-        <defend>You crouch under an unusually large shield, completely covering your body. You breathe a sigh of relief as the pinging of metal indicates you successfully blocked the incoming arrows.</defend>
-        <defend>You decide to rally your warriors to a better strategic position. You are now awaiting the enemy's next attack, relieved that you have secured the high ground.</defend>
-        <defend>You expand your defenses. Archer towers are very overrated, they say. They'll come around.</defend>
-        <defend>You find a few trees in the forest that have been struck by lightning and spot an opportunity. Chopping them down, you barricade the main road to your castle, making it harder for the enemy to bring heavy equipment.</defend>
-        <defend>You learn the art of medicine from travelers out west. Your warriors now die less often, thanks to being fortified against disease and infection.</defend>
-        <defend>You meet a lone rider in the forest and he tells you about approaching warriors. You get back to the castle just in time to fortify your defenses.</defend>
-        <defend>You recruit a medieval defense specialist from the local area. She was worth every coin.</defend>
-        <defend>You remembered to lock the front gate. This will surely slow the enemy down this time.</defend>
-        <defend>You send out a spy to join the ranks of the enemy team. The scout successfully informs you of incoming attacks before they happen. Everyone likes that guy.</defend>
-        <defend>You take clay and mud from a nearby swamp and use it to protect against those predictable fire arrows they've been using for 3 days now.</defend>
-        <defend>You took some time to re-fasten the straps on your shield. You are slightly more efficient with it now.</defend>
-        <defend>Your skills in masonry come in handy as you repair the city walls with bricks you craft out of clay, fortifying your defenses.</defend>
+        <tier level="1">
+            <defend>"My presence here is not a problem," you say. "Your presence here is not a problem," the enemy warrior repeats. "You will let me go on my way," you say. "I will let you go on your way," the enemy warrior repeats.</defend>
+            <defend>A bard comes to your camp in the forest as she offers to sing you a song. Your spirits are lifted and you stay more alert during the night watch.</defend>
+            <defend>A man asks to be let into your castle, and he turns out to be a quite proficient metal-smith. Your armor has much greater mobility, making it easier to defend yourself.</defend>
+            <defend>A roadside merchant offers to repair your gear for a few coins. He even adds some improvements to your armour!</defend>
+            <defend>An old lady in the forest offers you some soup. You feel refreshed and are better able to hold up your shield in battle.</defend>
+            <defend>Batting down the hatches you take the chance to reinforce your castles walls. No one will be getting in now!</defend>
+            <defend>Quick thinking has always been your strongest suit. You roll out of the way of an incoming arrow and retreat into the forest to regroup.</defend>
+            <defend>Taking advantage of the sunshine you go and collect wood from the forest to begin barricading your castle gate.</defend>
+        </tier>
+        <tier level="2">
+            <defend>Walking on a path in the forest, you encounter an old lady. She asks for help with her frying pan. You clean it for her and she tells you about a great spot to set up camp away from enemy patrol.</defend>
+            <defend>You always keep at your side a weatherman. When it rains, you strike devestating blows to your armored enemies as they awkwardly struggle against the muddy terrain.</defend>
+            <defend>You and a small group of fellow warriors take advantage of the local resources; chopping down lumber to reinforce defenses. Cheap and efficient!</defend>
+            <defend>You and a squad of warriors use your shields to form an iron phalanx, becoming an impenetrable wall of metal. It's very effective.</defend>
+            <defend>You crouch under an unusually large shield, completely covering your body. You breathe a sigh of relief as the pinging of metal indicates you successfully blocked the incoming arrows.</defend>
+            <defend>You decide to rally your warriors to a better strategic position. You are now awaiting the enemy's next attack, relieved that you have secured the high ground.</defend>
+            <defend>You expand your defenses. Archer towers are very overrated, they say. They'll come around.</defend>
+            <defend>You find a few trees in the forest that have been struck by lightning and spot an opportunity. Chopping them down, you barricade the main road to your castle, making it harder for the enemy to bring heavy equipment.</defend>
+        </tier>
+        <tier level="3">
+            <defend>You learn the art of medicine from travelers out west. Your warriors now die less often, thanks to being fortified against disease and infection.</defend>
+            <defend>You meet a lone rider in the forest and he tells you about approaching warriors. You get back to the castle just in time to fortify your defenses.</defend>
+            <defend>You recruit a medieval defense specialist from the local area. She was worth every coin.</defend>
+            <defend>You remembered to lock the front gate. This will surely slow the enemy down this time.</defend>
+            <defend>You send out a spy to join the ranks of the enemy team. The scout successfully informs you of incoming attacks before they happen. Everyone likes that guy.</defend>
+            <defend>You take clay and mud from a nearby swamp and use it to protect against those predictable fire arrows they've been using for 3 days now.</defend>
+            <defend>You took some time to re-fasten the straps on your shield. You are slightly more efficient with it now.</defend>
+            <defend>Your skills in masonry come in handy as you repair the city walls with bricks you craft out of clay, fortifying your defenses.</defend>
+        </tier>
     </team>
 </actions>
