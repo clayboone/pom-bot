@@ -9,7 +9,7 @@ from pombot.data.pom_wars.actions import Attacks
 from pombot.lib.errors import DescriptionTooLongError
 from pombot.lib.messages import send_embed_message
 from pombot.lib.pom_wars.action_chances import is_action_successful
-from pombot.lib.pom_wars.dedup_tools import check_user_add_pom
+from pombot.lib.pom_wars.dedup_tools import check_user_add_pom, get_average_poms
 from pombot.lib.pom_wars.team import get_user_team
 from pombot.lib.storage import Storage
 from pombot.lib.types import ActionType, DateRange
@@ -68,7 +68,7 @@ async def do_attack(ctx: Context, *args):
 
     attack = Attacks.get_random(
         team=action["team"],
-        average_daily_actions=1,  #FIXME add to DB methods
+        average_daily_actions=await get_average_poms(ctx.author),
         critical=action["was_critical"],
         heavy=heavy_attack,
     )

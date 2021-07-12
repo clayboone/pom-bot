@@ -104,6 +104,15 @@ class Pomwars:
     KNIGHT_ROLE = "Knight"
     VIKING_ROLE = "Viking"
 
+    AVERAGING_PERIOD_DAYS = 7
+    MAX_FORGIVEN_DAYS = 2
+
+    # NOTE: When this is set to False, then there is a hard cap on the number
+    # of actions each day which can be considered for averaging, called the
+    # Shadow Cap.
+    CONSIDER_ONLY_SUCCESSFUL_ACTIONS = True
+    SHADOW_CAP_LIMIT_PER_DAY = 10
+
     BASE_DAMAGE_FOR_NORMAL_ATTACKS = 10
     BASE_DAMAGE_FOR_HEAVY_ATTACKS = 40
     BASE_CHANCE_FOR_CRITICAL = 0.20

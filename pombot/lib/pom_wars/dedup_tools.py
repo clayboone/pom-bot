@@ -1,12 +1,13 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from discord.ext.commands import Context
+from discord.user import User as DiscordUser
 
 import pombot.lib.pom_wars.errors as war_crimes
-from pombot.config import Config, Reactions
+from pombot.config import Config, Pomwars, Reactions
 from pombot.lib.errors import DescriptionTooLongError
 from pombot.lib.storage import Storage
-from pombot.lib.types import User as BotUser
+from pombot.lib.types import DateRange, User as BotUser
 
 
 async def check_user_add_pom(
@@ -45,3 +46,22 @@ async def check_user_add_pom(
     await ctx.message.add_reaction(Reactions.TOMATO)
 
     return user
+
+
+async def get_average_poms(user: DiscordUser) -> float:
+    today = datetime.today().strftime("%B %d").split()
+    last_week = (datetime.today() - timedelta(days=Pomwars.AVERAGING_PERIOD_DAYS)).strftime("%B %d").split()
+
+    actions = await Storage.get_actions(
+        user=user,
+        was_successful=Pomwars.CONSIDER_ONLY_SUCCESSFUL_ACTIONS,
+        date_range=DateRange(*today, *last_week),
+    )
+
+    #FIXME don't consider anything except attacks and defends (no bribes).
+
+    if not Pomwars.CONSIDER_ONLY_SUCCESSFUL_ACTIONS:
+        #FIXME make shadow cap list comp
+        ...
+
+    return 4.2  #FIXME obviously

@@ -1,6 +1,6 @@
 import unittest
 
-from pombot.config import Config, Secrets
+from pombot.config import Config, Pomwars, Secrets
 
 
 def test_loading_config_gives_no_errors():
@@ -19,6 +19,9 @@ def test_all_secrets_exist_in_env():
 
         assert hasattr(Secrets, name), f"{name} must be specified in .env"
         assert getattr(Secrets, name), f"{name} must not be blank in .env"
+
+def test_averaging_period_and_forgiveness_are_valid():
+    assert 0 <= Pomwars.MAX_FORGIVEN_DAYS < Pomwars.AVERAGING_PERIOD_DAYS
 
 
 # NOTE: Debug attributes are tested defensively insteand of in a unit test

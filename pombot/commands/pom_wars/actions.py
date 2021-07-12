@@ -13,8 +13,7 @@ async def do_actions(ctx: Context, *args):
     """See your actions."""
     date_range = None
     today = datetime.today().strftime("%B %d").split()
-    yesterday = (datetime.today() -
-                 timedelta(days=1)).strftime("%B %d").split()
+    yesterday = (datetime.today() - timedelta(days=1)).strftime("%B %d").split()
 
     descriptive_dates = {
         "today": DateRange(*today, *today),
