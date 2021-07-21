@@ -21,6 +21,9 @@ def test_all_secrets_exist_in_env():
         assert getattr(Secrets, name), f"{name} must not be blank in .env"
 
 def test_averaging_period_and_forgiveness_are_valid():
+    """Test that the averaging period and the number of forgiven days are valid
+    relative to each other.
+    """
     assert 0 <= Pomwars.MAX_FORGIVEN_DAYS < Pomwars.AVERAGING_PERIOD_DAYS
 
 
